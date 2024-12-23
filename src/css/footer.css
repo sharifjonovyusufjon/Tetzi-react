@@ -1,0 +1,115 @@
+.footer {
+  position: relative;
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.footer .footer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.footer .footer-container .footer-box {
+  position: relative;
+  width: 100%;
+  height: 374px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-box .box-top {
+  margin-top: 52px;
+  width: 100%;
+  height: 192px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.box-top .top-menu {
+  width: 56px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.box-top .top-help {
+  margin-left: 80px;
+  width: 160px;
+}
+
+.box-top .top-call {
+  margin-left: 134px;
+  width: 307px;
+}
+
+.box-top .menu-title {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.box-top .menu-boxes {
+  display: flex;
+  flex-direction: column;
+}
+
+.box-top .box-text {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}
+
+.box-top .top-img {
+  margin-left: 80px;
+  width: 84px;
+  height: 38px;
+}
+
+.footer-box .box-bot {
+  margin-bottom: 54px;
+  width: 100%;
+  height: 30px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.box-bot .bot-box {
+  width: 100px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.box-bot .bot-text {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}

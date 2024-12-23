@@ -12,7 +12,6 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: blueviolet;
 }
 
 .header .header-container .header-box {
@@ -27,7 +26,6 @@
 }
 
 .header-box .header-img {
-  margin-left: 160px;
   width: 84px;
   height: 38px;
 }
@@ -54,7 +52,6 @@
 }
 
 .header-box .header-icon {
-  margin-right: 160px;
   width: 150px;
 
   display: flex;
