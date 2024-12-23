@@ -25,12 +25,12 @@
   background-color: aliceblue;
 }
 
-.header-box .header-img {
+.header .header-box .header-img {
   width: 84px;
   height: 38px;
 }
 
-.header-box .header-menu {
+.header .header-box .header-menu {
   position: relative;
   width: 450px;
   height: 20px;
@@ -41,7 +41,7 @@
   justify-content: space-between;
 }
 
-.header-menu .menu-text {
+.header .header-menu .menu-text {
   font-family: "Nunito ExtraBold";
   font-size: 14px;
   font-weight: 800;
@@ -51,7 +51,7 @@
   color: rgb(19, 39, 98);
 }
 
-.header-box .header-icon {
+.header .header-box .header-icon {
   width: 150px;
 
   display: flex;
