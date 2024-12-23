@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-color: rgb(255, 255, 255);
 }
 
 .header .header-container {
@@ -22,7 +23,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: aliceblue;
+  background-color: rgb(255, 255, 255);
 }
 
 .header .header-box .header-img {

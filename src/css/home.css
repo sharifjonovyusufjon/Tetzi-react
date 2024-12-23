@@ -65,7 +65,6 @@
   /* img joylash */
   width: 400px;
   height: 100%;
-  background-color: blue;
 }
 
 .home-navbar .navbar-bot {
@@ -98,3 +97,121 @@
   text-align: left;
   color: rgb(115, 115, 115);
 }
+
+/* shop categoties */
+
+.shop-categories {
+  position: relative;
+  padding-top: 129px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.shop-categories .shop-categories-container {
+  width: 100%;
+  height: 646px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shop-categories .shop-categories-container .shop-categories-title {
+  font-family: "Nunito" Black;
+  font-size: 39px;
+  font-weight: 900;
+  line-height: 52px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.shop-categories .shop-categories-container .shop-categories-menu {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shop-categories-menu .shop-box {
+  width: 300px;
+  height: 450px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: white;
+  border-radius: 12px;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0),
+    rgba(253, 250, 245, 0.5) 100%
+  );
+}
+
+.shop-image-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-box .img {
+  width: 300px;
+  height: 450px;
+}
+
+.shop-box .text {
+  position: absolute;
+  margin-top: 350px;
+  font-family: "Nunito ExtraBold";
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 29px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(19, 39, 98);
+
+  width: 330px;
+  height: 150px;
+  background-color: rgb(255, 255, 255);
+  border-top-left-radius: 300px;
+  border-top-right-radius: 300px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  text-align: center;
+  line-height: 100px;
+}
+
+/* pagination ==> */
+.shop-categories .shop-categories-container .shop-pagination {
+  width: 120px;
+  height: 30px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shop-pagination .pagination {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: rgb(255, 216, 129);
+}
+
+/* < == pagination */
