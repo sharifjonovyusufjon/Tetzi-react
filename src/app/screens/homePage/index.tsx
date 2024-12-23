@@ -1,3 +1,9 @@
+import BestSeller from "./bestSeller";
+
 export default function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <div className={"homepage"}>
+      <BestSeller />
+    </div>
+  );
 }
