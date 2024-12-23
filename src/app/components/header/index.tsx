@@ -1,8 +1,8 @@
 import { Box, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
 import PageviewIcon from "@mui/icons-material/Pageview";
+import Basket from "./basket";
 
 export default function Header() {
   return (
@@ -95,16 +95,7 @@ export default function Header() {
             >
               <link rel="stylesheet" href="" />
             </PageviewIcon>
-            <LocalMallIcon
-              sx={{
-                color: "#86D4F5",
-                width: "36px",
-                height: "36px",
-                cursor: "pointer",
-              }}
-            >
-              <link rel="stylesheet" href="" />
-            </LocalMallIcon>
+            <Basket />
           </Stack>
         </Stack>
       </Container>

@@ -16,7 +16,7 @@
   justify-content: space-between;
 }
 
-.navbar-top .navbar-menu {
+.home-navbar .navbar-top .navbar-menu {
   margin-top: 158px;
   width: 644px;
   height: 362px;
@@ -26,7 +26,7 @@
   justify-content: space-between;
 }
 
-.navbar-menu .menu-title {
+.home-navbar .navbar-menu .menu-title {
   font-family: "Nunito" Black;
   font-size: 63px;
   font-weight: 900;
@@ -36,7 +36,7 @@
   color: rgb(19, 39, 98);
 }
 
-.navbar-menu .menu-text {
+.home-navbar .navbar-menu .menu-text {
   font-family: "Nunito";
   font-size: 16px;
   font-weight: 400;
@@ -46,7 +46,7 @@
   color: rgb(115, 115, 115);
 }
 
-.navbar-menu .menu-button {
+.home-navbar .navbar-menu .menu-button {
   width: 200px;
   height: 50px;
   font-family: "Nunito ExtraBold";
@@ -61,7 +61,7 @@
   background: rgb(255, 216, 129);
 }
 
-.navbar-top .navbar-img {
+.home-navbar .navbar-top .navbar-img {
   /* img joylash */
   width: 400px;
   height: 100%;
