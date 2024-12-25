@@ -624,6 +624,124 @@
   justify-content: space-between;
 }
 
+/* jounal */
+
+.journal {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgb(255, 255, 255);
+}
+
+.journal .journal-container {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgb(255, 255, 255);
+}
+
+.journal .journal-container .journal-boxs {
+  margin-top: 128px;
+  margin-bottom: 182px;
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.journal .journal-boxs .journal-title {
+  font-family: "Nunito Black";
+  font-size: 39px;
+  font-weight: 900;
+  line-height: 52px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.journal .journal-boxs .journal-card {
+  margin-top: 47px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.journal .journal-card .journal-box {
+  width: 400px;
+  height: 674px;
+
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.journal .journal-box .card-img {
+  position: relative;
+  width: 400px;
+  height: 532px;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  box-sizing: border-box;
+  border: 1px solid rgb(240, 240, 240);
+  border-radius: 12px;
+}
+
+.journal .journal-box .card-text {
+  margin-top: 26px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.journal .card-text .journal-category {
+  font-family: "Nunito";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}
+
+.journal .card-text .journal-title {
+  font-family: "Nunito";
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.journal .card-text .journal-text {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}
+
 /* not avaible */
 
 .not-vaible {
@@ -642,4 +760,5 @@
   letter-spacing: 0px;
   text-align: left;
   color: rgb(19, 39, 98);
+  background-color: rgb(255, 255, 255);
 }
