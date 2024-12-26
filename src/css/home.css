@@ -150,11 +150,11 @@
 
   background-color: white;
   border-radius: 12px;
-  background: linear-gradient(
+  /* background: linear-gradient(
     0deg,
     rgba(255, 255, 255, 0),
     rgba(253, 250, 245, 0.5) 100%
-  );
+  ); */
 }
 
 .shop-image-box {
