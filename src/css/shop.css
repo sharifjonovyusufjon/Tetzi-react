@@ -256,6 +256,7 @@
 }
 
 .product-page .sort .sort-select {
+  padding-left: 20px;
   width: 239px;
   height: 36px;
   font-family: "Nunito";
@@ -272,6 +273,7 @@
 }
 
 .product-page .sort .sort-select-num {
+  padding-left: 20px;
   width: 139px;
   height: 36px;
   font-family: "Nunito";
