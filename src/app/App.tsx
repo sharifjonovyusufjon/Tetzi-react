@@ -21,7 +21,7 @@ export default function App() {
         <Route path="/shop/*" element={<ShopPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
-        <Route path="/journal" element={<JournalPage />} />
+        <Route path="/journal/*" element={<JournalPage />} />
         <Route path="/user" element={<UserPage />} />
       </Routes>
       <Footer />

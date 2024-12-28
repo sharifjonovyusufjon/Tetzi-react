@@ -1,0 +1,37 @@
+.journal-page {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.journal-page .container {
+  margin-top: 140px;
+  margin-bottom: 140px;
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+/* chosenJournal */
+
+.journal-chosen-page {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.journal-chosen-page .container {
+  margin-top: 140px;
+  margin-bottom: 140px;
+  width: 100%;
+  height: auto;
+  display: flex;
+}
