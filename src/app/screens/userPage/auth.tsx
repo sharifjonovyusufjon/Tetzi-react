@@ -6,7 +6,7 @@ export default function Auth() {
   const [showAuth, setShowAuth] = useState<boolean>(true);
 
   const handleAuth = () => {
-    setShowAuth(false);
+    setShowAuth(!showAuth);
   };
   return (
     <div>
