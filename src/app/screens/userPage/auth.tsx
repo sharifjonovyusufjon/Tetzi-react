@@ -1,3 +1,5 @@
+import Login from "./login";
+
 export default function Auth() {
-  return <div>Auth</div>;
+  return <Login />;
 }

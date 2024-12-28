@@ -4,9 +4,10 @@ import Card from "./card";
 import Checkout from "./checkout";
 import { useEffect } from "react";
 import Auth from "./auth";
+import "../../../css/user.css";
 
 export default function UserPage() {
-  const setAuthMember: boolean = false;
+  const setAuthMember: boolean = true;
   const navigate = useNavigate();
 
   useEffect(() => {
