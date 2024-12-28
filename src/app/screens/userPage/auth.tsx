@@ -1,5 +1,21 @@
+import { useState } from "react";
 import Login from "./login";
+import Signup from "./signup";
 
 export default function Auth() {
-  return <Login />;
+  const [showAuth, setShowAuth] = useState<boolean>(true);
+
+  const handleAuth = () => {
+    setShowAuth(false);
+  };
+  return (
+    <div>
+      {showAuth ? (
+        <Login handleAuth={handleAuth} />
+      ) : (
+        <Signup handleAuth={handleAuth} />
+      )}
+      ;
+    </div>
+  );
 }

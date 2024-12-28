@@ -1,6 +1,10 @@
 import { Container, Stack } from "@mui/material";
 
-export default function Signup() {
+interface SignupProps {
+  handleAuth: () => void;
+}
+export default function Signup(props: SignupProps) {
+  const { handleAuth } = props;
   return (
     <div className="user-page">
       <Container className="container">

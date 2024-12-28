@@ -53,8 +53,144 @@
 .user-page .container .login {
   position: relative;
   width: 100%;
-  height: 400px;
-  background-color: rgb(150, 187, 255);
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.login span {
+  width: 644px;
+  height: 60px;
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}
+
+.login .login-box {
+  margin-top: 120px;
+  width: 100%;
+  height: 311px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.login .login-box strong {
+  font-family: "Nunito Black";
+  font-size: 39px;
+  font-weight: 900;
+  line-height: 52px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.login .login-box .text {
+  width: 644px;
+  height: 60px;
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}
+
+.login .login-box .btnl {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+
+  border-radius: 7px;
+  background: rgb(255, 216, 129);
+}
+
+.login .login-box .btns {
+  margin-top: 51px;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+
+  border-radius: 7px;
+  background: rgb(255, 184, 204);
+}
+
+.login .login-box .login-input {
+  margin-bottom: 29px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+
+.login .login-box .login-input .input {
+  width: 508px;
+  height: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid #f6f6f6;
+}
+
+.login .login-box .login-input .input span {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.login .login-box .login-input .input input {
+  width: 100%;
+  height: 49px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  font-family: "Nunito";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+  border: none;
+  outline: none;
 }
 
 /* signup */
