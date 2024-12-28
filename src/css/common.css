@@ -95,7 +95,7 @@ a {
 
 /*contacts*/
 
-.other-journal {
+.other-contact {
   width: 100%;
   height: 320px;
   display: flex;
@@ -106,7 +106,7 @@ a {
   background: rgb(253, 250, 245);
 }
 
-.other-journal .other-journal-container {
+.other-contact .other-contact-container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -115,7 +115,7 @@ a {
   justify-content: center;
 }
 
-.other-journal .other-journal-container .journal-title {
+.other-contact .other-contact-container .contact-title {
   font-family: "Nunito Black";
   font-size: 49px;
   font-weight: 900;
@@ -125,7 +125,7 @@ a {
   color: rgb(19, 39, 98);
 }
 
-.other-journal .other-journal-container .journal-text {
+.other-contact .other-contact-container .contact-text {
   font-family: "Nunito";
   font-size: 12px;
   font-weight: 400;
@@ -165,7 +165,7 @@ a {
   color: rgb(19, 39, 98);
 }
 
-.other-contact .other-contact-container .contact-text {
+.other-journal .other-journal-container .journal-text {
   font-family: "Nunito";
   font-size: 12px;
   font-weight: 400;
