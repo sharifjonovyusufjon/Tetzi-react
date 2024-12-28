@@ -522,4 +522,402 @@
 .chosen-product-page {
   width: 100%;
   height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.chosen-product-page .container {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chosen-product-page .container .product-box {
+  margin-top: 140px;
+  width: 100%;
+  height: 560px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chosen-product-page .container .product-box img {
+  width: 800px;
+  height: 560px;
+
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.chosen-product-page .container .product-box .product-data {
+  width: 390px;
+  height: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chosen-product-page .container .product-box .product-data .title {
+  font-family: "Nunito Black";
+  font-size: 39px;
+  font-weight: 900;
+  line-height: 52px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.chosen-product-page .container .product-box .product-data .price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 25px;
+}
+
+.chosen-product-page .price p {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: left;
+  text-decoration: line-through;
+  color: rgb(115, 115, 115);
+}
+
+.chosen-product-page .price span {
+  font-family: "Nunito";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgba(255, 0, 0, 0.49);
+}
+
+.chosen-product-page .container .product-box .product-data .divider {
+  width: 390px;
+  margin-top: 22px;
+  margin-bottom: 22px;
+  border: 1px solid #f6f6f6;
+}
+
+.chosen-product-page .container .product-box .product-data .name {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.chosen-product-page .container .product-box .product-data .color {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 80px;
+}
+
+.chosen-product-page .color div {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.chosen-product-page .container .product-box .product-data .size {
+  margin-top: 43px;
+  margin-bottom: 43px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 97px;
+}
+
+.chosen-product-page .size div {
+  padding-left: 21px;
+  width: 139px;
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+  border: 1px solid #f6f6f6;
+}
+
+.chosen-product-page .container .product-box .product-data .quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 53px;
+}
+
+.chosen-product-page .quantity div {
+  width: 139px;
+  height: 36px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid #f6f6f6;
+}
+
+.chosen-product-page .quantity div button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  border: none;
+  background: none;
+  color: rgb(115, 115, 115);
+  cursor: pointer;
+}
+.chosen-product-page .quantity div span {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}
+
+.chosen-product-page .container .product-box .product-data .button-box {
+  width: 390px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chosen-product-page .button-box .btn2 {
+  width: 170px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: right;
+  color: rgb(255, 255, 255);
+  border: none;
+
+  border-radius: 7px;
+  background: rgb(255, 216, 129);
+  cursor: pointer;
+}
+
+.chosen-product-page .button-box .btn1 {
+  width: 170px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: right;
+  color: rgb(255, 255, 255);
+  border: none;
+
+  border-radius: 7px;
+  background: rgb(255, 184, 204);
+  cursor: pointer;
+}
+
+.chosen-product-page .product-data .desc {
+  width: 390px;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chosen-product-page .desc span {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.chosen-product-page .desc p {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}
+
+.chosen-product-page .desc div {
+  font-family: "Nunito";
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 23px;
+  letter-spacing: 0px;
+  color: rgb(19, 39, 98);
+  cursor: pointer;
+}
+
+.chosen-product-page .container .rewiev-box {
+  margin-top: 134px;
+  margin-bottom: 134px;
+  width: 100%;
+  height: 450px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chosen-product-page .container .rewiev-box .title {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 29px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(19, 39, 98);
+}
+
+.chosen-product-page .container .rewiev-box .boxes {
+  width: 100%;
+  height: 200px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #f6f6f6;
+  overflow: scroll;
+}
+
+.chosen-product-page .rewiev-box .boxes .comm {
+  padding: 0 10px 10px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.chosen-product-page .rewiev-box .boxes .comm span {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.chosen-product-page .rewiev-box .boxes .comm p {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}
+.chosen-product-page .container .rewiev-box .review {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.chosen-product-page .container .rewiev-box .review span {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.chosen-product-page .container .rewiev-box .review input {
+  width: 100%;
+  height: 40px;
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+  border: 1px solid #f6f6f6;
+  outline: none;
+}
+
+.chosen-product-page .container .rewiev-box .review button {
+  /* margin-top: 20px; */
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 7px;
+  background: rgb(255, 216, 129);
 }
