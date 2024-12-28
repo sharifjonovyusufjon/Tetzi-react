@@ -1,0 +1,111 @@
+.contact-page {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.contact-page .container {
+  margin-top: 140px;
+  margin-bottom: 140px;
+  width: 100%;
+  height: 1100px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-page .container .iframe {
+  width: 100%;
+  height: 500px;
+}
+
+.contact-page .container .contact-box {
+  width: 100%;
+  height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-page .container .contact-box .title {
+  font-family: "Nunito Black";
+  font-size: 39px;
+  font-weight: 900;
+  line-height: 52px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.contact-page .container .contact-box .button {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: center;
+  border-radius: 7px;
+  color: rgb(255, 255, 255);
+  background: rgb(255, 216, 129);
+}
+
+.contact-page .container .contact-box .input-box {
+  width: 780px;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-page .container .contact-box .input-box .box {
+  margin-bottom: 23px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.contact-page .container .contact-box .input-box .box span {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.contact-page .container .contact-box .input-box .box input {
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Nunito";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+  outline: none;
+  border: 1px solid #f6f6f6;
+}
