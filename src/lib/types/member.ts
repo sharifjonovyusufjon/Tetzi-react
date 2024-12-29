@@ -17,7 +17,7 @@ export interface MemberInput {
   memberAddress: string[];
   memberCity: string;
   memberCountry: MemberCountry;
-  memberState: MemberState;
+  memberState?: string;
   memberPostCode: number;
   memberPoints?: number;
 }
@@ -35,7 +35,7 @@ export interface Member {
   memberAddress: string[];
   memberCity: string;
   memberCountry: MemberCountry;
-  memberState: MemberState;
+  memberState: string;
   memberPostCode: number;
   memberPoints: number;
   createdAt?: Date;

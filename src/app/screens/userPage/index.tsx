@@ -7,7 +7,7 @@ import Auth from "./auth";
 import "../../../css/user.css";
 
 export default function UserPage() {
-  const setAuthMember: boolean = true;
+  const setAuthMember: boolean = false;
   const navigate = useNavigate();
 
   useEffect(() => {

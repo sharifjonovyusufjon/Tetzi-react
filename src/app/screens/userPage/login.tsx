@@ -1,4 +1,9 @@
 import { Button, Container, Stack } from "@mui/material";
+import { useState } from "react";
+import { T } from "../../../lib/types/common";
+import { Messages } from "../../../lib/config";
+import MemberSevice from "../../services/MemberService";
+import { LoginInput } from "../../../lib/types/member";
 
 interface LoginProps {
   handleAuth: () => void;
@@ -6,6 +11,34 @@ interface LoginProps {
 
 export default function Login(props: LoginProps) {
   const { handleAuth } = props;
+
+  const [memberEmail, setMemberEmail] = useState<string>("");
+  const [memberPassword, setMemberPassword] = useState<string>("");
+
+  const handleEmail = (e: T) => {
+    setMemberEmail(e.target.value);
+  };
+
+  const handlePassword = (e: T) => {
+    setMemberPassword(e.target.value);
+  };
+
+  const handleLoginRequest = async () => {
+    try {
+      const isFullfill = memberEmail !== "" && memberPassword !== "";
+      if (!isFullfill) throw new Error(Messages.error3);
+
+      const loginInput: LoginInput = {
+        memberEmail: memberEmail,
+        memberPassword: memberPassword,
+      };
+      const memberService = new MemberSevice();
+      const result = await memberService.login(loginInput);
+      console.log("login", result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="user-page">
       <Container className="container">
@@ -24,14 +57,24 @@ export default function Login(props: LoginProps) {
             <Stack className="login-input">
               <Stack className="input">
                 <span>Email address</span>
-                <input type="email" placeholder="company@gmail.com" />
+                <input
+                  type="email"
+                  placeholder="company@gmail.com"
+                  onChange={handleEmail}
+                />
               </Stack>
               <Stack className="input">
                 <span>Password</span>
-                <input type="password" placeholder=". . . . . . . . . . ." />
+                <input
+                  type="password"
+                  placeholder=". . . . . . . . . . ."
+                  onChange={handlePassword}
+                />
               </Stack>
             </Stack>
-            <Button className="btnl">Log in</Button>
+            <Button className="btnl" onClick={handleLoginRequest}>
+              Log in
+            </Button>
           </Stack>
           <Stack className="login-box">
             <strong>New Customer</strong>
