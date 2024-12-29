@@ -1,7 +1,13 @@
 import { Box, Button, Container, Stack } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import LastPageIcon from "@mui/icons-material/LastPage";
-import { url } from "inspector";
+import { retrieveBestSeller } from "./selector";
+import { createSelector } from "reselect";
+import { useSelector } from "react-redux";
+
+const bestSellerRetrieve = createSelector(retrieveBestSeller, (bestSeller) => ({
+  bestSeller,
+}));
 
 export default function BestSeller() {
   interface BestSellerProduct {
@@ -45,7 +51,9 @@ export default function BestSeller() {
       image: "/img/baby.jpg",
     },
   ];
-
+  // Seletor: Store => DATA
+  const { bestSeller } = useSelector(bestSellerRetrieve);
+  console.log("bestSeller", bestSeller);
   return (
     <div className="best-seller">
       <Container className="best-container">

@@ -7,12 +7,23 @@ import SaleShop from "./saleShop";
 import ShopCategories from "./shopCategories";
 import "../../../css/home.css";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { setBestSeller, setJournal } from "./slice";
+import { Product } from "../../../lib/types/product";
+
+const actionDispatch = (dispatch: Dispatch) => ({
+  setBestSeller: (data: Product[]) => dispatch(setBestSeller(data)),
+  setJournal: (data: Product[]) => dispatch(setJournal(data)),
+});
 
 export default function HomePage() {
-  // Seletor: Store => DATA
+  const { setBestSeller, setJournal } = actionDispatch(useDispatch());
+
   useEffect(() => {
     // Baskend Data => DATA
     // Slice: DATA => Store
+    // setBestSeller();
   }, []);
 
   return (
