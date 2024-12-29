@@ -1,57 +1,38 @@
 import { Box, Container, Stack } from "@mui/material";
+import { retrieveJournal } from "./selector";
+import { createSelector } from "reselect";
+import { useSelector } from "react-redux";
+import { serverApi } from "../../../lib/config";
 
-export default function Journal() {
-  interface Journal {
-    title: string;
-    category: string;
-    text: string;
-    image: string;
-  }
+const journalRetrieve = createSelector(retrieveJournal, (journal) => ({
+  journal,
+}));
 
-  const journal: Journal[] = [
-    {
-      title:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      category: "Category",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et aliqua.",
-      image: "/img/baby.jpg",
-    },
-    {
-      title:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      category: "Category",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et aliqua.",
-      image: "/img/baby.jpg",
-    },
-    {
-      title:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      category: "Category",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et aliqua.",
-      image: "/img/baby.jpg",
-    },
-  ];
-
+export default function Journals() {
+  const { journal } = useSelector(journalRetrieve);
   return (
     <div className="journal">
       <Container className="journal-container">
         <Stack className="journal-boxs">
-          <Box className="journal-title">Our Bestsellers</Box>
+          <Box className="journal-title">Journal</Box>
           <Stack className="journal-card">
             {journal.length !== 0 ? (
               journal.map((ele, index) => {
+                const imagePath = `${serverApi}/${ele.journalImage}`;
                 return (
                   <Stack className="journal-box">
                     <Box
                       className={"card-img"}
                       sx={{
-                        backgroundImage: `url(${ele.image})`,
+                        backgroundImage: `url(${imagePath})`,
                       }}
                     ></Box>
                     <Stack className={"card-text"}>
-                      <Box className={"journal-category"}>{ele.category}</Box>
-                      <Box className={"journal-title"}>{ele.title}</Box>
-                      <Box className={"journal-text"}>{ele.text}</Box>
+                      <Box className={"journal-category"}>
+                        {ele.journalCategory}
+                      </Box>
+                      <Box className={"journal-title"}>{ele.journalTitle}</Box>
+                      <Box className={"journal-text"}>{ele.journalContext}</Box>
                     </Stack>
                   </Stack>
                 );

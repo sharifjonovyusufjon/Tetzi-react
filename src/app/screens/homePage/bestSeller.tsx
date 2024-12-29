@@ -4,74 +4,34 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import { retrieveBestSeller } from "./selector";
 import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
+import { serverApi } from "../../../lib/config";
 
 const bestSellerRetrieve = createSelector(retrieveBestSeller, (bestSeller) => ({
   bestSeller,
 }));
 
 export default function BestSeller() {
-  interface BestSellerProduct {
-    id: number;
-    name: string;
-    color: string;
-    price: number;
-    image: string;
-    badge?: "Sale" | "new";
-  }
-
-  const bestSellers: BestSellerProduct[] = [
-    {
-      id: 1,
-      name: "Baby Crew Car Seat",
-      color: "Grey",
-      price: 44.0,
-      image: "/img/baby.jpg",
-      badge: "Sale",
-    },
-    {
-      id: 2,
-      name: "Woopy Stroller",
-      color: "Red",
-      price: 44.0,
-      image: "/img/baby.jpg",
-    },
-    {
-      id: 3,
-      name: "Black Baby Jumper",
-      color: "Black",
-      price: 44.0,
-      image: "/img/baby.jpg",
-      badge: "new",
-    },
-    {
-      id: 4,
-      name: "Simple Winter Shoes",
-      color: "Blue",
-      price: 44.0,
-      image: "/img/baby.jpg",
-    },
-  ];
-  // Seletor: Store => DATA
   const { bestSeller } = useSelector(bestSellerRetrieve);
   console.log("bestSeller", bestSeller);
   return (
     <div className="best-seller">
       <Container className="best-container">
         <Stack className="best-boxs">
-          <Box className="best-title">Our Bestsellers</Box>
+          <Box className="best-title">Our Best Sellers</Box>
           <Stack className="best-card">
-            {bestSellers.length !== 0 ? (
-              bestSellers.map((ele, index) => {
+            {bestSeller.length !== 0 ? (
+              bestSeller.map((ele, index) => {
+                const imagePath = `${serverApi}/${ele.productImages[0]}`;
                 return (
                   <Stack className="card-box" key={index}>
                     <Box
                       className={"card-img"}
                       sx={{
-                        backgroundImage: `url(${ele.image})`,
+                        backgroundImage: `url(${imagePath})`,
                       }}
                     >
-                      {ele.badge === "Sale" ? (
-                        <Box className={"card-badge"}>{ele.badge}</Box>
+                      {ele.productColor === "RED" ? (
+                        <Box className={"card-badge"}>{"Sale"}</Box>
                       ) : (
                         <Box className={"card-badge1"}>New</Box>
                       )}
@@ -81,9 +41,11 @@ export default function BestSeller() {
                       </Stack>
                     </Box>
                     <Stack className={"card-text"}>
-                      <Box className={"product-name"}>{ele.name}</Box>
-                      <Box className={"product-color"}>{ele.color}</Box>
-                      <Box className={"product-price"}>${ele.price}.00</Box>
+                      <Box className={"product-name"}>{ele.productName}</Box>
+                      <Box className={"product-color"}>{ele.productColor}</Box>
+                      <Box className={"product-price"}>
+                        ${ele.productPrice}.00
+                      </Box>
                     </Stack>
                   </Stack>
                 );

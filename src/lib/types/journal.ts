@@ -17,6 +17,17 @@ export interface Journal {
   journalData?: [Comment];
 }
 
+export interface AllSearchJournal {
+  text?: string;
+  journalCategory?: JournalCategory;
+}
+
+export interface JournalInQuiry {
+  page: number;
+  limit: number;
+  search: AllSearchJournal;
+}
+
 export interface UpdateJournalInput {
   _id: string;
   journalStatus?: JournalStatus;
