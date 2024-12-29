@@ -4,13 +4,13 @@ import { Product } from "./product";
 /* APP STATE */
 
 export interface AppRootState {
-  homePage: HomePage;
+  homePage: HomePageState;
   //   shopPage: ShopPage;
 }
 
-export interface HomePage {
+export interface HomePageState {
   bestSeller: Product[];
   journal: Journal[];
 }
 
-export interface ShopPage {}
+export interface ShopPageState {}
