@@ -421,8 +421,287 @@
 .user-page .container .card {
   position: relative;
   width: 100%;
-  height: 400px;
-  background-color: rgb(150, 187, 255);
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card .card-item {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card .card-item .card-title {
+  width: 100%;
+  height: 89px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px 12px 0px 0px;
+  background: rgb(253, 250, 245);
+}
+
+.card .card-item .card-map {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card .card-item .card-map .item {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #f6f6f6;
+}
+
+.card .card-item .card-map .item .iproduct {
+  padding-left: 20px;
+  width: 320px;
+  height: 160px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card .card-item .card-map .item .iproduct .ibtn {
+  width: 10px;
+  height: 10px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.card .card-item .card-map .item .iproduct .itext {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.card .card-item .card-map .item .iprice {
+  padding-left: 20px;
+  width: 320px;
+  height: 160px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #f6f6f6;
+}
+
+.card .card-item .card-map .item .iprice .ptext {
+  font-family: "Nunito";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgba(255, 0, 0, 0.49);
+}
+
+.card .card-item .card-map .item .iquantity {
+  padding-left: 20px;
+  width: 320px;
+  height: 160px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #f6f6f6;
+}
+
+.card .card-item .card-map .item .iquantity .quan {
+  width: 139px;
+  height: 36px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #f6f6f6;
+}
+
+.card .card-item .card-map .item .iquantity .quan .quan-text {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}
+
+.card .card-item .card-map .item .iquantity .quan .quan-button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+}
+
+.card .card-item .card-map .item .itotal {
+  padding-left: 20px;
+  width: 320px;
+  height: 160px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #f6f6f6;
+}
+
+.card .card-item .card-map .item .itotal .ptext {
+  font-family: "Nunito";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgba(255, 0, 0, 0.49);
+}
+
+.card .card-item .card-title .title-text {
+  padding-left: 20px;
+  width: 320px;
+  height: 89px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+  border: 1px solid #f6f6f6;
+}
+
+.card .card-total {
+  margin-top: 53px;
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.card .card-total .total-text {
+  font-family: "Nunito ExtraBold";
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 29px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(19, 39, 98);
+}
+
+.card .card-total .total-box {
+  margin-top: 22px;
+  margin-bottom: 30px;
+  width: 644px;
+  height: 60px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card .card-total .total-box .tt {
+  width: 322px;
+  height: 60px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+  border: 1px solid #f6f6f6;
+}
+
+.card .card-total .total-box .pp {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 322px;
+  height: 60px;
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+  border: 1px solid #f6f6f6;
+}
+
+.card .card-total .total-button {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  border-radius: 7px;
+  background: rgb(255, 216, 129);
 }
 
 /* checkout */
