@@ -1378,7 +1378,7 @@
     "@floating-ui/core" "^1.6.0"
     "@floating-ui/utils" "^0.2.8"
 
-"@floating-ui/react-dom@^2.0.8":
+"@floating-ui/react-dom@^2.0.8", "@floating-ui/react-dom@^2.1.1":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@floating-ui/react-dom/-/react-dom-2.1.2.tgz#a1349bbf6a0e5cb5ded55d023766f20a4d439a31"
   integrity sha512-06okr5cgPzMNBy+Ycse2A6udMi4bqwW/zgBF/rwjcNqWkyr82Mcg8b0vjX8OJpZFy/FKjJmw6wV7t44kK6kW7A==
@@ -1847,6 +1847,19 @@
     clsx "^2.1.0"
     prop-types "^15.8.1"
 
+"@mui/base@5.0.0-beta.68":
+  version "5.0.0-beta.68"
+  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-beta.68.tgz#a651d0f490dcf9495ce297a2f7403cfa6fd94841"
+  integrity sha512-F1JMNeLS9Qhjj3wN86JUQYBtJoXyQvknxlzwNl6eS0ZABo1MiohMONj3/WQzYPSXIKC2bS/ZbyBzdHhi2GnEpA==
+  dependencies:
+    "@babel/runtime" "^7.26.0"
+    "@floating-ui/react-dom" "^2.1.1"
+    "@mui/types" "^7.2.20"
+    "@mui/utils" "^6.3.0"
+    "@popperjs/core" "^2.11.8"
+    clsx "^2.1.1"
+    prop-types "^15.8.1"
+
 "@mui/core-downloads-tracker@^5.16.12":
   version "5.16.12"
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.16.12.tgz#fecab4d99059a6af5e6c4bfdbc29e2ed2a33f8a2"
@@ -1876,6 +1889,19 @@
     "@mui/types" "^7.2.15"
     "@mui/utils" "^5.16.12"
     clsx "^2.1.0"
+    prop-types "^15.8.1"
+
+"@mui/lab@^6.0.0-beta.21":
+  version "6.0.0-beta.21"
+  resolved "https://registry.yarnpkg.com/@mui/lab/-/lab-6.0.0-beta.21.tgz#1dc660fd7709d6b02be9d85a3d050bac453ddeab"
+  integrity sha512-hiFZgTwBNhJMUlEhmqfW4+5wy3C8UF9KFuzSOux6x4kgc9hsC0l+motXcF1Vyh+jhJYGeZ6yUoImqCf9RWzEvw==
+  dependencies:
+    "@babel/runtime" "^7.26.0"
+    "@mui/base" "5.0.0-beta.68"
+    "@mui/system" "^6.3.0"
+    "@mui/types" "^7.2.20"
+    "@mui/utils" "^6.3.0"
+    clsx "^2.1.1"
     prop-types "^15.8.1"
 
 "@mui/material@^6.3.0":
