@@ -23,6 +23,7 @@ export default function Signup(props: SignupProps) {
   const [memberPostCode, setMemberPostCode] = useState<number>(0);
   const [memberCountry, setMemberCountry] = useState<string>("KOREA");
   const [memberState, setMemberState] = useState<string>("");
+  const [isCheck, setIsCheck] = useState<boolean>(false);
 
   const handleFirstName = (e: T) => {
     setMemberFirstName(e.target.value);
@@ -49,6 +50,7 @@ export default function Signup(props: SignupProps) {
   };
 
   const handleAddress = (e: T) => {
+    if (memberAddress.length === 2) memberAddress.shift();
     const newAddress = e.target.value;
     setMemberAddress((prevAddress) => [...prevAddress, newAddress]);
   };
@@ -69,11 +71,16 @@ export default function Signup(props: SignupProps) {
     setMemberState(e.target.value);
   };
 
+  const handleCheck = (e: T) => {
+    setIsCheck(e.target.value);
+  };
+
   const handleSignupRequest = async () => {
     try {
       console.log("state", memberState);
       const isFulfill =
         memberFirstName !== "" &&
+        isCheck !== false &&
         memberLastName !== "" &&
         memberEmail !== "" &&
         memberAddress.length !== 0 &&
@@ -85,22 +92,11 @@ export default function Signup(props: SignupProps) {
         repaidPassword !== "" &&
         memberState !== "";
 
-      console.log(
-        memberFirstName,
-        memberLastName,
-        memberEmail,
-        memberAddress,
-        memberPhone,
-        memberCity,
-        memberPassword,
-        memberCountry,
-        memberPostCode,
-        repaidPassword,
-        memberState
-      );
       if (!isFulfill) throw new Error(Messages.error3);
+      if (String(memberPostCode).split("").length !== 5)
+        throw new Error(Messages.error7);
       if (memberPassword !== repaidPassword) throw new Error(Messages.error6);
-
+      console.log("memberPostCode", memberPostCode);
       const signupInput: MemberInput = {
         memberFirstName: memberFirstName,
         memberLastName: memberLastName,
@@ -265,7 +261,11 @@ export default function Signup(props: SignupProps) {
           <Stack className="button-box">
             <Stack className="sign-button">
               <div className="duvs">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  checked={isCheck}
+                  onChange={handleCheck}
+                />
                 <span>I have read and agree to the Privacy Policy</span>
               </div>
               <Button className="sign" onClick={handleSignupRequest}>
