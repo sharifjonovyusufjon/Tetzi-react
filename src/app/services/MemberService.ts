@@ -13,10 +13,11 @@ class MemberSevice {
       const url = this.path + "/member/signup";
       const result = await axios.post(url, input, { withCredentials: true });
       const member: Member = result.data.member;
-      console.log(result.data.member);
+      localStorage.setItem("memberData", JSON.stringify(member));
       return member;
     } catch (err) {
       console.log("Err, signup", err);
+      throw err;
     }
   }
 
@@ -25,12 +26,24 @@ class MemberSevice {
       const url = this.path + "/member/login";
       const result = await axios.post(url, input, { withCredentials: true });
       const member: Member = result.data.member;
-      console.log(result.data.member);
+      localStorage.setItem("memberData", JSON.stringify(member));
       return member;
     } catch (err) {
       console.log("Err, login", err);
+      throw err;
     }
   }
+
+  //   public async logout(input: LoginInput): Promise<boolean> {
+  //     try {
+  //       const url = this.path + "/member/logout";
+  //       const result = await axios.get(url, { withCredentials: true });
+  //       localStorage.setItem("memberData", JSON.stringify(member));
+  //       return true;
+  //     } catch (err) {
+  //       console.log("Err, login", err);
+  //     }
+  //   }
 }
 
 export default MemberSevice;

@@ -5,6 +5,7 @@ import { Messages } from "../../../lib/config";
 import { MemberInput } from "../../../lib/types/member";
 import { MemberCountry, MemberState } from "../../../lib/enums/member.enum";
 import MemberSevice from "../../services/MemberService";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
 
 interface SignupProps {
   handleAuth: () => void;
@@ -75,6 +76,12 @@ export default function Signup(props: SignupProps) {
     setIsCheck(e.target.value);
   };
 
+  const handleKeyDown = (e: T) => {
+    if (e.key === "Enter") {
+      handleSignupRequest().then();
+    }
+  };
+
   const handleSignupRequest = async () => {
     try {
       console.log("state", memberState);
@@ -96,7 +103,7 @@ export default function Signup(props: SignupProps) {
       if (String(memberPostCode).split("").length !== 5)
         throw new Error(Messages.error7);
       if (memberPassword !== repaidPassword) throw new Error(Messages.error6);
-      console.log("memberPostCode", memberPostCode);
+
       const signupInput: MemberInput = {
         memberFirstName: memberFirstName,
         memberLastName: memberLastName,
@@ -112,9 +119,11 @@ export default function Signup(props: SignupProps) {
 
       const memberService = new MemberSevice();
       const result = await memberService.signup(signupInput);
-      console.log("result", result);
+
+      // Auth context
     } catch (err) {
       console.log(err);
+      sweetErrorHandling(err).then();
     }
   };
 
@@ -253,6 +262,7 @@ export default function Signup(props: SignupProps) {
                     type="text"
                     placeholder="Repeat password"
                     onChange={handleRepaid}
+                    onKeyDown={handleKeyDown}
                   />
                 </Stack>
               </Stack>

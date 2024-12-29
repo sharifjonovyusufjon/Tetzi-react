@@ -4,6 +4,7 @@ import { T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
 import MemberSevice from "../../services/MemberService";
 import { LoginInput } from "../../../lib/types/member";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
 
 interface LoginProps {
   handleAuth: () => void;
@@ -23,6 +24,12 @@ export default function Login(props: LoginProps) {
     setMemberPassword(e.target.value);
   };
 
+  const handleKeyDown = (e: T) => {
+    if (e.key === "Enter") {
+      handleLoginRequest().then();
+    }
+  };
+
   const handleLoginRequest = async () => {
     try {
       const isFullfill = memberEmail !== "" && memberPassword !== "";
@@ -34,9 +41,11 @@ export default function Login(props: LoginProps) {
       };
       const memberService = new MemberSevice();
       const result = await memberService.login(loginInput);
-      console.log("login", result);
+
+      // Auth context
     } catch (err) {
       console.log(err);
+      sweetErrorHandling(err).then();
     }
   };
   return (
@@ -69,6 +78,7 @@ export default function Login(props: LoginProps) {
                   type="password"
                   placeholder=". . . . . . . . . . ."
                   onChange={handlePassword}
+                  onKeyDown={handleKeyDown}
                 />
               </Stack>
             </Stack>
