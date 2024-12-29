@@ -220,8 +220,99 @@
 
 .signup .signup-input {
   width: 100%;
-  height: 200px;
-  background-color: red;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup .signup-input .box {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.signup .signup-input .box .stext {
+  margin-bottom: 48px;
+  font-family: "Nunito Black";
+  font-size: 39px;
+  font-weight: 900;
+  line-height: 52px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.signup .signup-input .box .inputs {
+  margin-bottom: 24px;
+  width: 1048px;
+  height: 68px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.signup .signup-input .box .inputs .input {
+  width: 508px;
+  height: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid #f6f6f6;
+}
+
+.signup .signup-input .box .inputs .input .text {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.signup .signup-input .box .inputs .input input {
+  width: 100%;
+  height: 49px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  font-family: "Nunito";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+  border: none;
+  outline: none;
+}
+
+.signup .signup-input .box .inputs .input select {
+  width: 100%;
+  height: 49px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  font-family: "Nunito";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(115, 115, 115);
+  border: none;
+  outline: none;
 }
 
 .signup .button-box {
