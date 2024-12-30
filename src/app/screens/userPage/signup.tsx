@@ -1,17 +1,30 @@
 import { Button, Container, Stack } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
-import { MemberInput } from "../../../lib/types/member";
+import { Member, MemberInput } from "../../../lib/types/member";
 import { MemberCountry, MemberState } from "../../../lib/enums/member.enum";
 import MemberSevice from "../../services/MemberService";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
+import { useGlobals } from "../../hooks/useGlobals";
+import { useNavigate } from "react-router-dom";
 
 interface SignupProps {
   handleAuth: () => void;
 }
 export default function Signup(props: SignupProps) {
   const { handleAuth } = props;
+  const { authMember, setAuthMember } = useGlobals();
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!authMember) {
+      navigate("/user");
+    }
+  }, [authMember, navigate]);
 
   const [memberFirstName, setMemberFirstName] = useState<string>("");
   const [memberLastName, setMemberLastName] = useState<string>("");
@@ -120,7 +133,8 @@ export default function Signup(props: SignupProps) {
       const memberService = new MemberSevice();
       const result = await memberService.signup(signupInput);
 
-      // Auth context
+      setAuthMember(result);
+      await sweetTopSmallSuccessAlert("success", 700);
     } catch (err) {
       console.log(err);
       sweetErrorHandling(err).then();

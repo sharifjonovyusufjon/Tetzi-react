@@ -3,8 +3,12 @@ import { useState } from "react";
 import { T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
 import MemberSevice from "../../services/MemberService";
-import { LoginInput } from "../../../lib/types/member";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { LoginInput, Member } from "../../../lib/types/member";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
+import { useGlobals } from "../../hooks/useGlobals";
 
 interface LoginProps {
   handleAuth: () => void;
@@ -12,6 +16,7 @@ interface LoginProps {
 
 export default function Login(props: LoginProps) {
   const { handleAuth } = props;
+  const { setAuthMember } = useGlobals();
 
   const [memberEmail, setMemberEmail] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
@@ -40,9 +45,10 @@ export default function Login(props: LoginProps) {
         memberPassword: memberPassword,
       };
       const memberService = new MemberSevice();
-      const result = await memberService.login(loginInput);
+      const result: Member | null = await memberService.login(loginInput);
 
-      // Auth context
+      setAuthMember(result);
+      await sweetTopSmallSuccessAlert("success", 700);
     } catch (err) {
       console.log(err);
       sweetErrorHandling(err).then();

@@ -8,7 +8,7 @@ class MemberSevice {
     this.path = serverApi;
   }
 
-  public async signup(input: MemberInput): Promise<Member | undefined> {
+  public async signup(input: MemberInput): Promise<Member | null> {
     try {
       const url = this.path + "/member/signup";
       const result = await axios.post(url, input, { withCredentials: true });
@@ -21,7 +21,7 @@ class MemberSevice {
     }
   }
 
-  public async login(input: LoginInput): Promise<Member | undefined> {
+  public async login(input: LoginInput): Promise<Member | null> {
     try {
       const url = this.path + "/member/login";
       const result = await axios.post(url, input, { withCredentials: true });
@@ -34,16 +34,16 @@ class MemberSevice {
     }
   }
 
-  //   public async logout(input: LoginInput): Promise<boolean> {
-  //     try {
-  //       const url = this.path + "/member/logout";
-  //       const result = await axios.get(url, { withCredentials: true });
-  //       localStorage.setItem("memberData", JSON.stringify(member));
-  //       return true;
-  //     } catch (err) {
-  //       console.log("Err, login", err);
-  //     }
-  //   }
+  public async logout(): Promise<boolean | undefined> {
+    try {
+      const url = this.path + "/member/logout";
+      const result = await axios.get(url, { withCredentials: true });
+      localStorage.removeItem("memberData");
+      return true;
+    } catch (err) {
+      console.log("Err, logout", err);
+    }
+  }
 }
 
 export default MemberSevice;

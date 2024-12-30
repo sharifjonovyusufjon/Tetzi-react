@@ -5,16 +5,18 @@ import Checkout from "./checkout";
 import { useEffect } from "react";
 import Auth from "./auth";
 import "../../../css/user.css";
+import { useGlobals } from "../../hooks/useGlobals";
 
 export default function UserPage() {
-  const setAuthMember: boolean = false;
+  const { authMember } = useGlobals();
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!setAuthMember) {
+    if (!authMember) {
       navigate("/user/auth");
     }
-  }, [setAuthMember, navigate]);
+  }, [authMember, navigate]);
 
   return (
     <div>

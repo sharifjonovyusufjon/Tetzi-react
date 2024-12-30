@@ -1,5 +1,12 @@
 import { Button, Container, Stack } from "@mui/material";
 import { useState } from "react";
+import { useGlobals } from "../../hooks/useGlobals";
+import { Messages, serverApi } from "../../../lib/config";
+import MemberSevice from "../../services/MemberService";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
 
 interface Member {
   memberFirstName: string;
@@ -27,6 +34,19 @@ const member: Member = {
 };
 
 export default function Account() {
+  const { authMember, setAuthMember } = useGlobals();
+
+  const handleLogoutRequest = async () => {
+    try {
+      const memberService = new MemberSevice();
+      const result = await memberService.logout();
+      await sweetTopSmallSuccessAlert("success", 700);
+      setAuthMember(null);
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(Messages.error1);
+    }
+  };
   return (
     <div className="user-page">
       <Container className="container">
@@ -40,7 +60,7 @@ export default function Account() {
               <span className="detail">Account details</span>
             </Stack>
             <Stack className="box">
-              <span>Logout</span>
+              <span onClick={handleLogoutRequest}>Logout</span>
             </Stack>
           </Stack>
           <Stack className="deatil-box">
@@ -50,7 +70,14 @@ export default function Account() {
                   Upload
                   <input type="file" id="file-in" />
                 </label>
-                <img src={member.memberImage} alt="" />
+                <img
+                  src={
+                    authMember?.memberImage
+                      ? `${serverApi}/${authMember.memberImage}`
+                      : member.memberImage
+                  }
+                  alt=""
+                />
               </Stack>
               <Stack className="box">
                 <span className="stext">Personal Details</span>
