@@ -15,16 +15,11 @@ import { useNavigate } from "react-router-dom";
 interface SignupProps {
   handleAuth: () => void;
 }
+
 export default function Signup(props: SignupProps) {
   const { handleAuth } = props;
   const { authMember, setAuthMember } = useGlobals();
-
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!authMember) {
-      navigate("/user");
-    }
-  }, [authMember, navigate]);
 
   const [memberFirstName, setMemberFirstName] = useState<string>("");
   const [memberLastName, setMemberLastName] = useState<string>("");
@@ -135,6 +130,7 @@ export default function Signup(props: SignupProps) {
 
       setAuthMember(result);
       await sweetTopSmallSuccessAlert("Sign up successfully!", 700);
+      navigate("/user");
     } catch (err) {
       console.log(err);
       sweetErrorHandling(err).then();

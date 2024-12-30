@@ -12,6 +12,16 @@ export const sweetErrorHandling = async (err: any) => {
   });
 };
 
+export const sweetErrorHandlingImg = async (err: any) => {
+  const error = err.response?.data ?? err;
+  const message = error;
+  await Swal.fire({
+    icon: "error",
+    text: message,
+    showConfirmButton: false,
+  });
+};
+
 export const sweetTopSuccessAlert = async (
   msg: string,
   duration: number = 2000

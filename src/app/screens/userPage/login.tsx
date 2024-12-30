@@ -9,6 +9,7 @@ import {
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
+import { useNavigate } from "react-router-dom";
 
 interface LoginProps {
   handleAuth: () => void;
@@ -17,6 +18,7 @@ interface LoginProps {
 export default function Login(props: LoginProps) {
   const { handleAuth } = props;
   const { setAuthMember } = useGlobals();
+  const navigate = useNavigate();
 
   const [memberEmail, setMemberEmail] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
@@ -49,6 +51,7 @@ export default function Login(props: LoginProps) {
 
       setAuthMember(result);
       await sweetTopSmallSuccessAlert("Log in successfully!", 700);
+      navigate("/user");
     } catch (err) {
       console.log(err);
       sweetErrorHandling(err).then();

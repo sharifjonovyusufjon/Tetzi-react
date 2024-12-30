@@ -5,6 +5,7 @@ import { Messages, serverApi } from "../../../lib/config";
 import MemberSevice from "../../services/MemberService";
 import {
   sweetErrorHandling,
+  sweetErrorHandlingImg,
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import { UpdateMemberInput } from "../../../lib/types/member";
@@ -128,7 +129,7 @@ export default function Account() {
       await sweetTopSmallSuccessAlert("Modified successfully!", 700);
     } catch (err) {
       console.log(err);
-      sweetErrorHandling(Messages.error1);
+      sweetErrorHandling(Messages.error1).then();
     }
   };
 
@@ -149,7 +150,8 @@ export default function Account() {
     const fileType = file.type;
     const validateImageTypes = ["image/jpg", "image/png", "image/jpeg"];
     if (!validateImageTypes.includes(fileType)) {
-      sweetErrorHandling(Messages.error5).then();
+      console.log(Messages.error5);
+      sweetErrorHandlingImg(Messages.error5).then();
     } else {
       if (file) {
         memberUpdateInput.memberImage = file;

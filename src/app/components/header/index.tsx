@@ -1,5 +1,5 @@
-import { Box, Container, Stack } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Box, Button, Container, Stack } from "@mui/material";
+import { Link, NavLink } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PageviewIcon from "@mui/icons-material/Pageview";
 import Basket from "./basket";
@@ -75,26 +75,41 @@ export default function Header() {
             </Box>
           </Stack>
           <Stack className="header-icon">
-            <AccountCircleIcon
-              sx={{
-                color: "#FFD881",
-                width: "36px",
-                height: "36px",
-                cursor: "pointer",
+            <Link
+              to={"/user"}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <link rel="stylesheet" href="" />
-            </AccountCircleIcon>
-            <PageviewIcon
-              sx={{
-                color: "#FFB8CC",
-                width: "36px",
-                height: "36px",
-                cursor: "pointer",
+              <AccountCircleIcon
+                sx={{
+                  color: "#FFD881",
+                  width: "36px",
+                  height: "36px",
+                  cursor: "pointer",
+                }}
+              ></AccountCircleIcon>
+            </Link>
+            <Link
+              to={"/shop"}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <link rel="stylesheet" href="" />
-            </PageviewIcon>
+              <PageviewIcon
+                sx={{
+                  color: "#FFB8CC",
+                  width: "36px",
+                  height: "36px",
+                  cursor: "pointer",
+                }}
+              ></PageviewIcon>
+            </Link>
+
             <Basket />
           </Stack>
         </Stack>
