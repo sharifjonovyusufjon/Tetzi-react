@@ -49,7 +49,7 @@ export interface ProductInQuery {
   direction?: Direction;
   limit: number;
   search: AlSearch;
-}
+} 
 
 export interface ProductBestSellerInQuery {
   page: number;

@@ -1,11 +1,12 @@
 import { Journal } from "./journal";
+import { Member } from "./member";
 import { Product } from "./product";
 
 /* APP STATE */
 
 export interface AppRootState {
   homePage: HomePageState;
-  //   shopPage: ShopPage;
+  shopPage: ShopPageState;
 }
 
 export interface HomePageState {
@@ -13,4 +14,8 @@ export interface HomePageState {
   journal: Journal[];
 }
 
-export interface ShopPageState {}
+export interface ShopPageState {
+  getProducts: Product[];
+  chosenProduct: Product | null;
+  admin: Member | null;
+}

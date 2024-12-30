@@ -2,131 +2,47 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import OtherShop from "../../components/header/otherShop";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import LastPageIcon from "@mui/icons-material/LastPage";
+import { setGetProducts } from "./slice";
+import { Product, ProductInQuery } from "../../../lib/types/product";
+import { Dispatch } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { createSelector } from "reselect";
+import { useSelector } from "react-redux";
+import { retrieveGetProducts } from "./selector";
+import { serverApi } from "../../../lib/config";
+import { useEffect } from "react";
+import ProductService from "../../services/ProductService";
+import { Direction } from "../../../lib/enums/product.enum";
+
+const actionDispatch = (dispatch: Dispatch) => ({
+  setGetProducts: (data: Product[]) => dispatch(setGetProducts(data)),
+});
+
+const getProductsRetrieve = createSelector(
+  retrieveGetProducts,
+  (getProducts) => ({
+    getProducts,
+  })
+);
 
 export default function Products() {
-  interface BestSellerProduct {
-    id: number;
-    name: string;
-    color: string;
-    price: number;
-    image: string;
-    badge?: "Sale" | "new";
-  }
+  const { setGetProducts } = actionDispatch(useDispatch());
+  const { getProducts } = useSelector(getProductsRetrieve);
 
-  const bestSellers: BestSellerProduct[] = [
-    {
-      id: 1,
-      name: "Baby Crew Car Seat",
-      color: "Grey",
-      price: 44.0,
-      image: "/img/baby.jpg",
-      badge: "Sale",
-    },
-    {
-      id: 2,
-      name: "Woopy Stroller",
-      color: "Red",
-      price: 44.0,
-      image: "/img/baby.jpg",
-    },
-    {
-      id: 3,
-      name: "Black Baby Jumper",
-      color: "Black",
-      price: 44.0,
-      image: "/img/baby.jpg",
-      badge: "new",
-    },
-    {
-      id: 4,
-      name: "Simple Winter Shoes",
-      color: "Blue",
-      price: 44.0,
-      image: "/img/baby.jpg",
-    },
-    {
-      id: 5,
-      name: "Simple Winter Shoes",
-      color: "Blue",
-      price: 44.0,
-      image: "/img/baby.jpg",
-    },
-    {
-      id: 1,
-      name: "Baby Crew Car Seat",
-      color: "Grey",
-      price: 44.0,
-      image: "/img/baby.jpg",
-      badge: "Sale",
-    },
-    {
-      id: 2,
-      name: "Woopy Stroller",
-      color: "Red",
-      price: 44.0,
-      image: "/img/baby.jpg",
-    },
-    {
-      id: 1,
-      name: "Baby Crew Car Seat",
-      color: "Grey",
-      price: 44.0,
-      image: "/img/baby.jpg",
-      badge: "Sale",
-    },
-    {
-      id: 2,
-      name: "Woopy Stroller",
-      color: "Red",
-      price: 44.0,
-      image: "/img/baby.jpg",
-    },
-    {
-      id: 1,
-      name: "Baby Crew Car Seat",
-      color: "Grey",
-      price: 44.0,
-      image: "/img/baby.jpg",
-      badge: "Sale",
-    },
-    {
-      id: 2,
-      name: "Woopy Stroller",
-      color: "Red",
-      price: 44.0,
-      image: "/img/baby.jpg",
-    },
-    {
-      id: 1,
-      name: "Baby Crew Car Seat",
-      color: "Grey",
-      price: 44.0,
-      image: "/img/baby.jpg",
-      badge: "Sale",
-    },
-    {
-      id: 2,
-      name: "Woopy Stroller",
-      color: "Red",
-      price: 44.0,
-      image: "/img/baby.jpg",
-    },
-    {
-      id: 1,
-      name: "Baby Crew Car Seat",
-      color: "Grey",
-      price: 44.0,
-      image: "/img/baby.jpg",
-      badge: "Sale",
-    },
-    {
-      id: 2,
-      name: "Woopy Stroller",
-      color: "Red",
-      price: 44.0,
-      image: "/img/baby.jpg",
-    },
-  ];
+  useEffect(() => {
+    const productService = new ProductService();
+    const productInput: ProductInQuery = {
+      page: 1,
+      limit: 6,
+      search: {},
+      direction: Direction.ASC,
+      sort: "createdAt",
+    };
+    productService
+      .getProducts(productInput)
+      .then((data) => setGetProducts(data))
+      .catch((err) => console.log("Err, getProducts", err));
+  }, []);
 
   return (
     <div className="product-page">
@@ -247,18 +163,19 @@ export default function Products() {
               </Stack>
             </Stack>
             <Stack className="best-card" display={"flex"} flexDirection={"row"}>
-              {bestSellers.length !== 0 ? (
-                bestSellers.map((ele, index) => {
+              {getProducts.length !== 0 ? (
+                getProducts.map((ele, index) => {
+                  const imagePath = `${serverApi}/${ele.productImages[0]}`;
                   return (
                     <Stack className="card-box" key={index}>
                       <Box
                         className={"card-img"}
                         sx={{
-                          backgroundImage: `url(${ele.image})`,
+                          backgroundImage: `url(${imagePath})`,
                         }}
                       >
-                        {ele.badge === "Sale" ? (
-                          <Box className={"card-badge"}>{ele.badge}</Box>
+                        {ele.productColor === "RED" ? (
+                          <Box className={"card-badge"}>Sale</Box>
                         ) : (
                           <Box className={"card-badge1"}>New</Box>
                         )}
@@ -268,9 +185,13 @@ export default function Products() {
                         </Stack>
                       </Box>
                       <Stack className={"card-text"}>
-                        <Box className={"product-name"}>{ele.name}</Box>
-                        <Box className={"product-color"}>{ele.color}</Box>
-                        <Box className={"product-price"}>${ele.price}.00</Box>
+                        <Box className={"product-name"}>{ele.productName}</Box>
+                        <Box className={"product-color"}>
+                          {ele.productColor}
+                        </Box>
+                        <Box className={"product-price"}>
+                          ${ele.productPrice}.00
+                        </Box>
                       </Stack>
                     </Stack>
                   );
