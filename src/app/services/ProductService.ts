@@ -29,16 +29,21 @@ class ProductService {
 
   public async getProducts(input: ProductInQuery): Promise<Product[]> {
     try {
-      const { page, limit, search, direction, sort } = input;
       const {
+        page,
+        limit,
+        direction,
+        sort,
         productCategory,
         productColor,
         productBrand,
-        productPrice,
+        start,
+        end,
         text,
-      } = search;
+      } = input;
 
-      let url = `${this.path}/product/all?page=${page}&sort=${sort}&limit=${limit}&search&direction=${direction}`;
+      let url = `${this.path}/product/all?page=${page}&sort=${sort}&limit=${limit}&direction=${direction}`;
+      if (productCategory) url += `&productCategory=${productCategory}`;
 
       const result = await axios.get(url);
       return result.data;

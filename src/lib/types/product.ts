@@ -30,26 +30,18 @@ export interface Product {
   productData?: [Comment];
 }
 
-interface PriceRange {
-  start?: number;
-  end?: number;
-}
-
-interface AlSearch {
-  productCategory?: ProductCategory;
-  productColor?: ProductColor;
-  productBrand?: ProductBrand;
-  productPrice?: PriceRange;
-  text?: string;
-}
-
 export interface ProductInQuery {
   page: number;
   sort?: string;
   direction?: Direction;
   limit: number;
-  search: AlSearch;
-} 
+  productCategory?: ProductCategory;
+  productColor?: ProductColor;
+  productBrand?: ProductBrand;
+  text?: string;
+  start?: number;
+  end?: number;
+}
 
 export interface ProductBestSellerInQuery {
   page: number;

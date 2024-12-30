@@ -10,9 +10,15 @@ import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
 import { retrieveGetProducts } from "./selector";
 import { serverApi } from "../../../lib/config";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductService from "../../services/ProductService";
-import { Direction } from "../../../lib/enums/product.enum";
+import {
+  Direction,
+  ProductBrand,
+  ProductCategory,
+  ProductColor,
+} from "../../../lib/enums/product.enum";
+import { T } from "../../../lib/types/common";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setGetProducts: (data: Product[]) => dispatch(setGetProducts(data)),
@@ -28,21 +34,50 @@ const getProductsRetrieve = createSelector(
 export default function Products() {
   const { setGetProducts } = actionDispatch(useDispatch());
   const { getProducts } = useSelector(getProductsRetrieve);
-
+  const [productInput, setProductInput] = useState<ProductInQuery>({
+    page: 1,
+    limit: 6,
+    direction: Direction.ASC,
+    sort: "createdAt",
+  });
   useEffect(() => {
     const productService = new ProductService();
-    const productInput: ProductInQuery = {
-      page: 1,
-      limit: 6,
-      search: {},
-      direction: Direction.ASC,
-      sort: "createdAt",
-    };
+
     productService
       .getProducts(productInput)
       .then((data) => setGetProducts(data))
       .catch((err) => console.log("Err, getProducts", err));
-  }, []);
+  }, [productInput]);
+
+  /* Handlers */
+
+  const handlerDirection = (e: T) => {
+    const direction = e.target.value;
+    if (direction === "asc") {
+      productInput.direction = Direction.ASC;
+      setProductInput({ ...productInput });
+    } else {
+      productInput.direction = Direction.DESC;
+      setProductInput({ ...productInput });
+    }
+  };
+
+  const handlerBrand = (e: T) => {
+    const brand = e.target.value;
+    productInput.productBrand = brand;
+    setProductInput({ ...productInput });
+  };
+
+  const handlerCategory = (category: ProductCategory) => {
+    productInput.productCategory = category;
+    setProductInput({ ...productInput });
+  };
+
+  const handlerColor = (e: T) => {
+    const color = e.target.value;
+    productInput.productColor = color;
+    setProductInput({ ...productInput });
+  };
 
   return (
     <div className="product-page">
@@ -61,11 +96,36 @@ export default function Products() {
                 justifyContent: "space-between",
               }}
             >
-              <Box className="box">Category</Box>
-              <Box className="box">Category</Box>
-              <Box className="box">Category</Box>
-              <Box className="box">Category</Box>
-              <Box className="box">Category</Box>
+              <div
+                className="box"
+                onClick={() => handlerCategory(ProductCategory.CLOTHES)}
+              >
+                {ProductCategory.CLOTHES}
+              </div>
+              <div
+                className="box"
+                onClick={() => handlerCategory(ProductCategory.TOYS)}
+              >
+                {ProductCategory.TOYS}
+              </div>
+              <div
+                className="box"
+                onClick={() => handlerCategory(ProductCategory.PAMPERS)}
+              >
+                {ProductCategory.PAMPERS}
+              </div>
+              <div
+                className="box"
+                onClick={() => handlerCategory(ProductCategory.CLOTHES)}
+              >
+                {ProductCategory.CLOTHES}
+              </div>
+              <div
+                className="box"
+                onClick={() => handlerCategory(ProductCategory.STROLLER)}
+              >
+                {ProductCategory.STROLLER}
+              </div>
             </Stack>
           </Stack>
           <Stack className="menu-box">
@@ -80,21 +140,21 @@ export default function Products() {
                 justifyContent: "space-between",
               }}
             >
-              <Box className="box-color">
-                <div className="green"></div> Category
-              </Box>
-              <Box className="box-color">
-                <div className="red"></div> Category
-              </Box>
-              <Box className="box-color">
-                <div className="orange"></div> Category
-              </Box>
-              <Box className="box-color">
-                <div className="pink"></div> Category
-              </Box>
-              <Box className="box-color">
-                <div className="blue"></div> Category
-              </Box>
+              <div className="box-color" onClick={handlerColor}>
+                <div className="green"></div> {ProductColor.GREEN}
+              </div>
+              <div className="box-color" onClick={handlerColor}>
+                <div className="red"></div> {ProductColor.BROWN}
+              </div>
+              <div className="box-color" onClick={handlerColor}>
+                <div className="orange"></div> {ProductColor.ORANGE}
+              </div>
+              <div className="box-color" onClick={handlerColor}>
+                <div className="pink"></div> {ProductColor.BLUE}
+              </div>
+              <div className="box-color" onClick={handlerColor}>
+                <div className="blue"></div> {ProductColor.GRAY}
+              </div>
             </Stack>
           </Stack>
           <Stack className="menu-box">
@@ -109,11 +169,21 @@ export default function Products() {
                 justifyContent: "space-between",
               }}
             >
-              <Box className="box">Brand</Box>
-              <Box className="box">Brand</Box>
-              <Box className="box">Brand</Box>
-              <Box className="box">Brand</Box>
-              <Box className="box">Brand</Box>
+              <div className="box" onClick={handlerBrand}>
+                {ProductBrand.UPPABABY}
+              </div>
+              <div className="box" onClick={handlerBrand}>
+                {ProductBrand.ZARA}
+              </div>
+              <div className="box" onClick={handlerBrand}>
+                {ProductBrand.TOMMEE}
+              </div>
+              <div className="box" onClick={handlerBrand}>
+                {ProductBrand.PAMPERS}
+              </div>
+              <div className="box" onClick={handlerBrand}>
+                {ProductBrand.MATTEL}
+              </div>
             </Stack>
           </Stack>
           <Stack className="menu-box">
@@ -156,8 +226,12 @@ export default function Products() {
                 </Box>
                 <Box className={"sort"}>
                   <div className="text">Show:</div>
-                  <select className="sort-select-num">
-                    <option value="">36</option>
+                  <select
+                    className="sort-select-num"
+                    onChange={handlerDirection}
+                  >
+                    <option value="asc">ASC</option>
+                    <option value="desc">DESC</option>
                   </select>
                 </Box>
               </Stack>
