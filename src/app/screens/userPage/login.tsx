@@ -48,7 +48,7 @@ export default function Login(props: LoginProps) {
       const result: Member | null = await memberService.login(loginInput);
 
       setAuthMember(result);
-      await sweetTopSmallSuccessAlert("success", 700);
+      await sweetTopSmallSuccessAlert("Log in successfully!", 700);
     } catch (err) {
       console.log(err);
       sweetErrorHandling(err).then();

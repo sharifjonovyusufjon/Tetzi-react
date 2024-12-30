@@ -43,8 +43,6 @@ export interface Member {
 }
 
 export interface UpdateMemberInput {
-  _id: string;
-  memberStatus?: MemberStatus;
   memberFirstName?: string;
   memberLastName?: string;
   memberEmail?: string;
@@ -55,7 +53,6 @@ export interface UpdateMemberInput {
   memberCountry?: MemberCountry;
   memberState?: MemberState;
   memberPostCode?: number;
-  memberPoints?: number;
 }
 
 export interface LoginInput {

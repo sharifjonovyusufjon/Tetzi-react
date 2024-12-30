@@ -134,7 +134,7 @@ export default function Signup(props: SignupProps) {
       const result = await memberService.signup(signupInput);
 
       setAuthMember(result);
-      await sweetTopSmallSuccessAlert("success", 700);
+      await sweetTopSmallSuccessAlert("Sign up successfully!", 700);
     } catch (err) {
       console.log(err);
       sweetErrorHandling(err).then();

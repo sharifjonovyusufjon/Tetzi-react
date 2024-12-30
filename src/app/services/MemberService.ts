@@ -1,6 +1,11 @@
 import axios from "axios";
 import { serverApi } from "../../lib/config";
-import { LoginInput, Member, MemberInput } from "../../lib/types/member";
+import {
+  LoginInput,
+  Member,
+  MemberInput,
+  UpdateMemberInput,
+} from "../../lib/types/member";
 
 class MemberSevice {
   private readonly path: string;
@@ -42,6 +47,44 @@ class MemberSevice {
       return true;
     } catch (err) {
       console.log("Err, logout", err);
+    }
+  }
+
+  public async updateMember(input: UpdateMemberInput): Promise<Member | null> {
+    try {
+      const formData = new FormData();
+      formData.append("memberFirstName", input.memberFirstName || "");
+      formData.append("memberLastName", input.memberLastName || "");
+      formData.append("memberEmail", input.memberEmail || "");
+      formData.append("memberPhone", input.memberPhone || "");
+      formData.append(
+        "memberAddress",
+        input.memberAddress ? JSON.stringify(input.memberAddress) : "[]"
+      );
+      formData.append("memberCity", input.memberCity || "");
+      formData.append("memberCountry", input.memberCountry || "");
+      formData.append("memberState", input.memberState || "");
+      formData.append(
+        "memberPostCode",
+        input.memberPostCode ? String(input.memberPostCode) : "00000"
+      );
+
+      formData.append("memberImage", input.memberImage || "");
+      const result = await axios(`${serverApi}/member/update`, {
+        method: "POST",
+        data: formData,
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      const member: Member = result.data.member;
+      localStorage.setItem("memberData", JSON.stringify(member));
+      return member;
+    } catch (err) {
+      console.log("Err, updateMember", err);
+      throw err;
     }
   }
 }
