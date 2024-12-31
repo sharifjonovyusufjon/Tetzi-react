@@ -1,10 +1,14 @@
 import { Box, Button, Container, Stack } from "@mui/material";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PageviewIcon from "@mui/icons-material/Pageview";
-import Basket from "./basket";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/user/card");
+  };
   return (
     <div className={"header"}>
       <Container className={"header-container"}>
@@ -110,7 +114,15 @@ export default function Header() {
               ></PageviewIcon>
             </Link>
 
-            <Basket />
+            <LocalMallIcon
+              sx={{
+                color: "#86D4F5",
+                width: "36px",
+                height: "36px",
+                cursor: "pointer",
+              }}
+              onClick={handleClick}
+            />
           </Stack>
         </Stack>
       </Container>
