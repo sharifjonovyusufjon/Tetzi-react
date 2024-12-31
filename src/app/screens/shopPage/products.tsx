@@ -62,8 +62,7 @@ export default function Products() {
     }
   };
 
-  const handlerBrand = (e: T) => {
-    const brand = e.target.value;
+  const handlerBrand = (brand: ProductBrand) => {
     productInput.productBrand = brand;
     setProductInput({ ...productInput });
   };
@@ -73,9 +72,24 @@ export default function Products() {
     setProductInput({ ...productInput });
   };
 
-  const handlerColor = (e: T) => {
-    const color = e.target.value;
+  const handlerColor = (color: ProductColor) => {
     productInput.productColor = color;
+    setProductInput({ ...productInput });
+  };
+
+  const handlePrice = (start: number, end: number) => {
+    productInput.start = start;
+    productInput.end = end;
+    setProductInput({ ...productInput });
+  };
+
+  const handlerSort = (e: T) => {
+    productInput.sort = e.target.value;
+    setProductInput({ ...productInput });
+  };
+
+  const handlerSearch = (e: T) => {
+    productInput.text = e.target.value;
     setProductInput({ ...productInput });
   };
 
@@ -140,19 +154,34 @@ export default function Products() {
                 justifyContent: "space-between",
               }}
             >
-              <div className="box-color" onClick={handlerColor}>
+              <div
+                className="box-color"
+                onClick={() => handlerColor(ProductColor.GREEN)}
+              >
                 <div className="green"></div> {ProductColor.GREEN}
               </div>
-              <div className="box-color" onClick={handlerColor}>
+              <div
+                className="box-color"
+                onClick={() => handlerColor(ProductColor.BROWN)}
+              >
                 <div className="red"></div> {ProductColor.BROWN}
               </div>
-              <div className="box-color" onClick={handlerColor}>
+              <div
+                className="box-color"
+                onClick={() => handlerColor(ProductColor.ORANGE)}
+              >
                 <div className="orange"></div> {ProductColor.ORANGE}
               </div>
-              <div className="box-color" onClick={handlerColor}>
+              <div
+                className="box-color"
+                onClick={() => handlerColor(ProductColor.BLUE)}
+              >
                 <div className="pink"></div> {ProductColor.BLUE}
               </div>
-              <div className="box-color" onClick={handlerColor}>
+              <div
+                className="box-color"
+                onClick={() => handlerColor(ProductColor.GRAY)}
+              >
                 <div className="blue"></div> {ProductColor.GRAY}
               </div>
             </Stack>
@@ -169,19 +198,34 @@ export default function Products() {
                 justifyContent: "space-between",
               }}
             >
-              <div className="box" onClick={handlerBrand}>
+              <div
+                className="box"
+                onClick={() => handlerBrand(ProductBrand.UPPABABY)}
+              >
                 {ProductBrand.UPPABABY}
               </div>
-              <div className="box" onClick={handlerBrand}>
+              <div
+                className="box"
+                onClick={() => handlerBrand(ProductBrand.ZARA)}
+              >
                 {ProductBrand.ZARA}
               </div>
-              <div className="box" onClick={handlerBrand}>
+              <div
+                className="box"
+                onClick={() => handlerBrand(ProductBrand.TOMMEE)}
+              >
                 {ProductBrand.TOMMEE}
               </div>
-              <div className="box" onClick={handlerBrand}>
+              <div
+                className="box"
+                onClick={() => handlerBrand(ProductBrand.PAMPERS)}
+              >
                 {ProductBrand.PAMPERS}
               </div>
-              <div className="box" onClick={handlerBrand}>
+              <div
+                className="box"
+                onClick={() => handlerBrand(ProductBrand.MATTEL)}
+              >
                 {ProductBrand.MATTEL}
               </div>
             </Stack>
@@ -198,15 +242,31 @@ export default function Products() {
                 justifyContent: "space-between",
               }}
             >
-              <Box className="box">$0.00 - $9.90</Box>
-              <Box className="box">$10.00 - $19.90</Box>
-              <Box className="box">$20.00 - $29.90</Box>
-              <Box className="box">$30.00 - $39.90</Box>
-              <Box className="box">$40.00 - $49.90</Box>
+              <div className="box" onClick={() => handlePrice(0, 10)}>
+                $0.00 - $9.90
+              </div>
+              <div className="box" onClick={() => handlePrice(10, 30)}>
+                $10.00 - $29.90
+              </div>
+              <div className="box" onClick={() => handlePrice(30, 50)}>
+                $30.00 - $49.90
+              </div>
+              <div className="box" onClick={() => handlePrice(50, 100)}>
+                $50.00 - $99.90
+              </div>
+              <div className="box" onClick={() => handlePrice(100, 200)}>
+                $100.00 - $199.90
+              </div>
             </Stack>
           </Stack>
         </Stack>
         <Stack className="product-box">
+          <input
+            type="search"
+            className="serach"
+            placeholder="Type to search"
+            onChange={handlerSearch}
+          />
           <div className="product-div">
             <Stack className="search-box">
               <Stack className="search-icon">
@@ -220,8 +280,9 @@ export default function Products() {
               <Stack className="search-sort">
                 <Box className={"sort"}>
                   <div className="text">Sort by:</div>
-                  <select className="sort-select">
-                    <option value="">Featured</option>
+                  <select className="sort-select" onChange={handlerSort}>
+                    <option value="createdAt">Featured</option>
+                    <option value="productPrice">Priced</option>
                   </select>
                 </Box>
                 <Box className={"sort"}>

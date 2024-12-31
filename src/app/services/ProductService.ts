@@ -44,6 +44,11 @@ class ProductService {
 
       let url = `${this.path}/product/all?page=${page}&sort=${sort}&limit=${limit}&direction=${direction}`;
       if (productCategory) url += `&productCategory=${productCategory}`;
+      if (productBrand) url += `&productBrand=${productBrand}`;
+      if (productColor) url += `&productColor=${productColor}`;
+      if (start) url += `&start=${start}`;
+      if (end) url += `&end=${end}`;
+      if (text) url += `&text=${text}`;
 
       const result = await axios.get(url);
       return result.data;
