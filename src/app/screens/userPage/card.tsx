@@ -2,10 +2,34 @@ import { Button, Container, Stack } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useGlobals } from "../../hooks/useGlobals";
 import { useNavigate } from "react-router-dom";
+import { setGetBaskets, setGetOrders } from "./slice";
+import { Order } from "../../../lib/types/order";
+import { retrieveGetOrders } from "./selector";
+import { Dispatch } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
+import { useDispatch, useSelector } from "react-redux";
+import { serverApi } from "../../../lib/config";
+
+const actionDispatch = (dispatch: Dispatch) => ({
+  setGetOrders: (data: Order[]) => dispatch(setGetOrders(data)),
+  setGetBaskets: (data: Order[]) => dispatch(setGetBaskets(data)),
+});
+
+const getOrdersRetrieve = createSelector(retrieveGetOrders, (getOrders) => ({
+  getOrders,
+}));
+
+const getBasketRetrieve = createSelector(retrieveGetOrders, (getBaskets) => ({
+  getBaskets,
+}));
 
 export default function Card() {
   const { authMember } = useGlobals();
   const navigate = useNavigate();
+  const { setGetOrders, setGetBaskets } = actionDispatch(useDispatch());
+  const { getOrders } = useSelector(getOrdersRetrieve);
+  const { getBaskets } = useSelector(getBasketRetrieve);
+
   if (!authMember) {
     navigate("/user/auth");
   }
@@ -27,6 +51,7 @@ export default function Card() {
             </Stack>
             <Stack className="card-map">
               {productItem.map((item) => {
+                const imagePath = `${serverApi}/${item}`
                 return (
                   <Stack className="item">
                     <Stack className="iproduct">
