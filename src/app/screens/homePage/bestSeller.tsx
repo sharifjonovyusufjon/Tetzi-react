@@ -8,6 +8,10 @@ import { serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
 import { useGlobals } from "../../hooks/useGlobals";
 import { BasketInput } from "../../../lib/types/basket";
+import {
+  sweetErrorHandling,
+  sweetErrorHandlingAuth,
+} from "../../../lib/sweetAlert";
 
 const bestSellerRetrieve = createSelector(retrieveBestSeller, (bestSeller) => ({
   bestSeller,
@@ -19,13 +23,17 @@ interface BestSeller {
 export default function BestSeller(props: BestSeller) {
   const { addToCard } = props;
   const navigate = useNavigate();
-  const { addBasket, setAddBasket } = useGlobals();
+  const { addBasket, setAddBasket, authMember } = useGlobals();
   const { bestSeller } = useSelector(bestSellerRetrieve);
 
   const handleAddCard = async (input: BasketInput) => {
     setAddBasket({ ...input });
     addToCard();
     console.log("add", addBasket);
+  };
+
+  const handleAuth = () => {
+    sweetErrorHandlingAuth("Please login first!");
   };
 
   const chosenProduct = (id: string) => {
@@ -56,11 +64,14 @@ export default function BestSeller(props: BestSeller) {
                       <Stack className="card-button">
                         <Button
                           className="button"
-                          onClick={() =>
-                            handleAddCard({
-                              productId: ele._id,
-                              basketQuantity: 1,
-                            })
+                          onClick={
+                            authMember
+                              ? () =>
+                                  handleAddCard({
+                                    productId: ele._id,
+                                    basketQuantity: 1,
+                                  })
+                              : handleAuth
                           }
                         >
                           Add to Card

@@ -13,6 +13,7 @@ import { serverApi } from "../../../lib/config";
 import ProductService from "../../services/ProductService";
 import { BasketInput } from "../../../lib/types/basket";
 import { useGlobals } from "../../hooks/useGlobals";
+import { sweetErrorHandlingAuth } from "../../../lib/sweetAlert";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
@@ -32,7 +33,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
   const { addToCard } = props;
   const { productId } = useParams();
   const navigate = useNavigate();
-  const { addBasket, setAddBasket } = useGlobals();
+  const { addBasket, setAddBasket, authMember } = useGlobals();
   const { setChosenProduct } = actionDispatch(useDispatch());
   const { chosenProduct } = useSelector(chosenProductRetrieve);
 
@@ -81,6 +82,10 @@ export default function ChosenProduct(props: ChosenProductProps) {
     if (chosenProduct?.productColor === "ORANGE") {
       return "ORANGE";
     }
+  };
+
+  const handleAuth = () => {
+    sweetErrorHandlingAuth("Please login first!");
   };
 
   const handleAddCard = async (input: BasketInput) => {
@@ -144,11 +149,11 @@ export default function ChosenProduct(props: ChosenProductProps) {
               </Button>
               <Button
                 className="btn2"
-                onClick={() =>
+                onClick={authMember ? () =>
                   handleAddCard({
                     productId: chosenProduct._id,
                     basketQuantity: 1,
-                  })
+                  }) : handleAuth
                 }
               >
                 Add to Card

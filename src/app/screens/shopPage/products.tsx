@@ -22,6 +22,7 @@ import { T } from "../../../lib/types/common";
 import { useNavigate } from "react-router-dom";
 import { useGlobals } from "../../hooks/useGlobals";
 import { BasketInput } from "../../../lib/types/basket";
+import { sweetErrorHandlingAuth } from "../../../lib/sweetAlert";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setGetProducts: (data: Product[]) => dispatch(setGetProducts(data)),
@@ -40,7 +41,7 @@ interface ProductProps {
 
 export default function Products(props: ProductProps) {
   const { addToCard } = props;
-  const { addBasket, setAddBasket } = useGlobals();
+  const { addBasket, setAddBasket, authMember } = useGlobals();
   const navigate = useNavigate();
   const { setGetProducts } = actionDispatch(useDispatch());
   const { getProducts } = useSelector(getProductsRetrieve);
@@ -60,6 +61,10 @@ export default function Products(props: ProductProps) {
   }, [productInput]);
 
   /* Handlers */
+
+  const handleAuth = () => {
+    sweetErrorHandlingAuth("Please login first!");
+  };
 
   const handleAddCard = async (input: BasketInput) => {
     setAddBasket({ ...input });
@@ -342,11 +347,14 @@ export default function Products(props: ProductProps) {
                         <Stack className="card-button">
                           <Button
                             className="button"
-                            onClick={() =>
-                              handleAddCard({
-                                productId: ele._id,
-                                basketQuantity: 1,
-                              })
+                            onClick={
+                              authMember
+                                ? () =>
+                                    handleAddCard({
+                                      productId: ele._id,
+                                      basketQuantity: 1,
+                                    })
+                                : handleAuth
                             }
                           >
                             Add to Card
