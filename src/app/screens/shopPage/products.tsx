@@ -99,6 +99,11 @@ export default function Products() {
     setProductInput({ ...productInput });
   };
 
+  const handlerPage = (page: number) => {
+    productInput.page = page;
+    setProductInput({ ...productInput });
+  };
+
   return (
     <div className="product-page">
       <OtherShop />
@@ -352,7 +357,15 @@ export default function Products() {
               {[1, 2, 3, 4, 5].map((ele, index) => {
                 const activeBacgroundColor = "rgb(255, 216, 129)";
                 const activeColor = "rgb(255, 255, 255)";
-                return <div className="page">{ele}</div>;
+                return (
+                  <Button
+                    onClick={() => handlerPage(ele)}
+                    className="page"
+                    key={index}
+                  >
+                    {ele}
+                  </Button>
+                );
               })}
             </Box>
             <Box className={"pag-text"}>Products from 1 to 12 of 80</Box>

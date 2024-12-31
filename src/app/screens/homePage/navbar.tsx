@@ -2,8 +2,13 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import LooksTwoSharpIcon from "@mui/icons-material/LooksTwoSharp";
 import ReplaySharpIcon from "@mui/icons-material/ReplaySharp";
 import MarkEmailUnreadSharpIcon from "@mui/icons-material/MarkEmailUnreadSharp";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const handlerAdd = () => {
+    navigate("/shop");
+  };
   return (
     <div className="home-navbar">
       <Container>
@@ -15,7 +20,9 @@ export default function Navbar() {
               industry. Lorem Ipsum has been the industry's standard dummy text
               ever since the
             </Box>
-            <Button className="menu-button">Add to Card</Button>
+            <Button className="menu-button" onClick={handlerAdd}>
+              Add to Card
+            </Button>
           </Stack>
           <Box className={"navbar-img"}>
             {/* <img src="/img/baby.png" alt="rasm" /> */}
