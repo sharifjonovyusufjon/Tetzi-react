@@ -1,3 +1,4 @@
+import { Basket } from "./basket";
 import { Journal } from "./journal";
 import { Member } from "./member";
 import { Order } from "./order";
@@ -24,5 +25,5 @@ export interface ShopPageState {
 
 export interface UserPageState {
   getOrders: Order[];
-  getBaskets: Order[];
+  getBaskets: Basket[];
 }
