@@ -1,7 +1,14 @@
 import { Button, Container, Stack } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import { useGlobals } from "../../hooks/useGlobals";
+import { useNavigate } from "react-router-dom";
 
 export default function Card() {
+  const { authMember } = useGlobals();
+  const navigate = useNavigate();
+  if (!authMember) {
+    navigate("/user/auth");
+  }
   const productItem = [1, 2];
   return (
     <div className="user-page">

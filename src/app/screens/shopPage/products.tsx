@@ -19,6 +19,7 @@ import {
   ProductColor,
 } from "../../../lib/enums/product.enum";
 import { T } from "../../../lib/types/common";
+import { useNavigate } from "react-router-dom";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setGetProducts: (data: Product[]) => dispatch(setGetProducts(data)),
@@ -32,6 +33,7 @@ const getProductsRetrieve = createSelector(
 );
 
 export default function Products() {
+  const navigate = useNavigate();
   const { setGetProducts } = actionDispatch(useDispatch());
   const { getProducts } = useSelector(getProductsRetrieve);
   const [productInput, setProductInput] = useState<ProductInQuery>({
@@ -50,6 +52,10 @@ export default function Products() {
   }, [productInput]);
 
   /* Handlers */
+
+  const chosenProduct = (id: string) => {
+    navigate(`/shop/${id}`);
+  };
 
   const handlerDirection = (e: T) => {
     const direction = e.target.value;
@@ -302,7 +308,7 @@ export default function Products() {
                 getProducts.map((ele, index) => {
                   const imagePath = `${serverApi}/${ele.productImages[0]}`;
                   return (
-                    <Stack className="card-box" key={index}>
+                    <Stack className="card-box" key={ele._id}>
                       <Box
                         className={"card-img"}
                         sx={{
@@ -316,7 +322,12 @@ export default function Products() {
                         )}
                         <Stack className="card-button">
                           <Button className="button">Add to Card</Button>
-                          <Button className="button">Add to Comment</Button>
+                          <Button
+                            className="button"
+                            onClick={() => chosenProduct(ele._id)}
+                          >
+                            Chosen to Product
+                          </Button>
                         </Stack>
                       </Box>
                       <Stack className={"card-text"}>

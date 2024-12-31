@@ -5,14 +5,19 @@ import { retrieveBestSeller } from "./selector";
 import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
 import { serverApi } from "../../../lib/config";
+import { useNavigate } from "react-router-dom";
 
 const bestSellerRetrieve = createSelector(retrieveBestSeller, (bestSeller) => ({
   bestSeller,
 }));
 
 export default function BestSeller() {
+  const navigate = useNavigate();
   const { bestSeller } = useSelector(bestSellerRetrieve);
-  console.log("bestSeller", bestSeller);
+
+  const chosenProduct = (id: string) => {
+    navigate(`/shop/${id}`);
+  };
   return (
     <div className="best-seller">
       <Container className="best-container">
@@ -23,7 +28,7 @@ export default function BestSeller() {
               bestSeller.map((ele, index) => {
                 const imagePath = `${serverApi}/${ele.productImages[0]}`;
                 return (
-                  <Stack className="card-box" key={index}>
+                  <Stack className="card-box" key={ele._id}>
                     <Box
                       className={"card-img"}
                       sx={{
@@ -37,7 +42,12 @@ export default function BestSeller() {
                       )}
                       <Stack className="card-button">
                         <Button className="button">Add to Card</Button>
-                        <Button className="button">Add to Comment</Button>
+                        <Button
+                          className="button"
+                          onClick={() => chosenProduct(ele._id)}
+                        >
+                          Chosen to Product
+                        </Button>
                       </Stack>
                     </Box>
                     <Stack className={"card-text"}>

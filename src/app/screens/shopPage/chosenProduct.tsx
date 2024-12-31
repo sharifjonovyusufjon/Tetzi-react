@@ -1,17 +1,32 @@
 import { Box, Container, Stack } from "@mui/material";
 import OtherShop from "../../components/header/otherShop";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { setChosenProduct } from "./slice";
+import { Product } from "../../../lib/types/product";
+import { Dispatch } from "@reduxjs/toolkit";
+import { retrieveChosenProduct } from "./selector";
+import { createSelector } from "reselect";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { serverApi } from "../../../lib/config";
+import ProductService from "../../services/ProductService";
+
+const actionDispatch = (dispatch: Dispatch) => ({
+  setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
+});
+
+const chosenProductRetrieve = createSelector(
+  retrieveChosenProduct,
+  (chosenProduct) => ({
+    chosenProduct,
+  })
+);
 
 export default function ChosenProduct() {
   const { productId } = useParams();
-
-  const [comments, setComments] = useState<string[]>([
-    "bur yaxshi",
-    "this best",
-    "best jbvjw jjbu jwgfuwqb ufgwbqub be4ub jbufbe",
-    "jebfjh jbfuwb ubfub bf2ubw jhbfu",
-  ]);
+  const { setChosenProduct } = actionDispatch(useDispatch());
+  const { chosenProduct } = useSelector(chosenProductRetrieve);
 
   const [desc, setDesc] = useState<boolean>(true);
   const descToggle = () => {
@@ -23,43 +38,69 @@ export default function ChosenProduct() {
       return <span>FEATURES & DETAILS</span>;
     }
     if (desc === false) {
-      return <p>{product.productDesc}</p>;
+      return <p>{chosenProduct?.productDesc}</p>;
     }
-  };
-
-  interface Product {
-    imagePath: string;
-    productPrice: number;
-    productColor: string;
-    productSize: string;
-    productDesc: string;
-  }
-
-  const product: Product = {
-    imagePath: "/img/baby.jpg",
-    productPrice: 44,
-    productColor: "RED",
-    productSize: "M",
-    productDesc: "lorem jrgubjr jrgujqb jbugqbj bjbq bqfbubu",
   };
 
   const bc = () => {
-    if (product.productColor === "RED") {
+    if (chosenProduct?.productColor === "RED") {
       return "rgb(255, 134, 134)";
+    }
+    if (chosenProduct?.productColor === "BLUE") {
+      return "BLUE";
+    }
+    if (chosenProduct?.productColor === "GREEN") {
+      return "GREEN";
+    }
+    if (chosenProduct?.productColor === "YELLOW") {
+      return "YELLOW";
+    }
+    if (chosenProduct?.productColor === "BLACK") {
+      return "BLACK";
+    }
+    if (chosenProduct?.productColor === "WHITE") {
+      return "WHITE";
+    }
+    if (chosenProduct?.productColor === "GRAY") {
+      return "GRAY";
+    }
+    if (chosenProduct?.productColor === "BROWN") {
+      return "BROWN";
+    }
+    if (chosenProduct?.productColor === "PINK") {
+      return "PINK";
+    }
+    if (chosenProduct?.productColor === "ORANGE") {
+      return "ORANGE";
     }
   };
 
+  useEffect(() => {
+    const productService = new ProductService();
+    const id = String(productId);
+    productService
+      .getProduct(id)
+      .then((data) => setChosenProduct(data))
+      .catch((err) => console.log(err));
+  }, []);
+  if (!chosenProduct) return null;
   return (
     <div className="chosen-product-page">
       <OtherShop />
       <Container className="container">
         <Stack className="product-box">
-          <img src={product.imagePath}></img>
+          <img src={`${serverApi}/${chosenProduct?.productImages[0]}`}></img>
           <Stack className="product-data">
             <Box className={"title"}>Product</Box>
             <Box className={"price"}>
-              <p>${product.productPrice * 2}.00</p>
-              <span>${product.productPrice}.00</span>
+              <p>
+                $
+                {chosenProduct?.productPrice
+                  ? chosenProduct?.productPrice
+                  : 0 * 2}
+                .00
+              </p>
+              <span>${chosenProduct?.productPrice}.00</span>
             </Box>
             <div className="divider"></div>
             <Box className={"color"}>
@@ -68,7 +109,7 @@ export default function ChosenProduct() {
             </Box>
             <Box className={"size"}>
               <span className="name">SIZE:</span>
-              <div>{product.productSize}</div>
+              <div>{chosenProduct?.productSize}</div>
             </Box>
             <Box className={"quantity"}>
               <span className="name">QUANTITY:</span>
@@ -94,14 +135,21 @@ export default function ChosenProduct() {
         <Stack className="rewiev-box">
           <Box className={"title"}>Comments</Box>
           <Stack className="boxes">
-            {comments.map((comment, index) => {
-              return (
-                <Box key={index} className={"comm"}>
-                  <span>John Ford</span>
-                  <p>{comment}</p>
-                </Box>
-              );
-            })}
+            {chosenProduct?.productData ? (
+              chosenProduct?.productData.map((comment, index) => {
+                return (
+                  <Box key={index} className={"comm"}>
+                    <span>John Ford</span>
+                    <p>Commnet Text</p>
+                  </Box>
+                );
+              })
+            ) : (
+              <Box className={"comm"}>
+                <span>Tetzi</span>
+                <p>No Commet</p>
+              </Box>
+            )}
           </Stack>
           <Stack className="review">
             <span>Your commet</span>
