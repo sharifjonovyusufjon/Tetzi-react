@@ -1,6 +1,6 @@
-import { Box, Container, Stack } from "@mui/material";
+import { Box, Button, Container, Stack } from "@mui/material";
 import OtherShop from "../../components/header/otherShop";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { setChosenProduct } from "./slice";
 import { Product } from "../../../lib/types/product";
@@ -11,6 +11,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { serverApi } from "../../../lib/config";
 import ProductService from "../../services/ProductService";
+import { BasketInput } from "../../../lib/types/basket";
+import { useGlobals } from "../../hooks/useGlobals";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
@@ -23,8 +25,14 @@ const chosenProductRetrieve = createSelector(
   })
 );
 
-export default function ChosenProduct() {
+interface ChosenProductProps {
+  addToCard: () => void;
+}
+export default function ChosenProduct(props: ChosenProductProps) {
+  const { addToCard } = props;
   const { productId } = useParams();
+  const navigate = useNavigate();
+  const { addBasket, setAddBasket } = useGlobals();
   const { setChosenProduct } = actionDispatch(useDispatch());
   const { chosenProduct } = useSelector(chosenProductRetrieve);
 
@@ -75,6 +83,16 @@ export default function ChosenProduct() {
     }
   };
 
+  const handleAddCard = async (input: BasketInput) => {
+    setAddBasket({ ...input });
+    addToCard();
+    console.log("add", addBasket);
+  };
+
+  const handleViewCard = () => {
+    navigate("/user/card");
+  };
+
   useEffect(() => {
     const productService = new ProductService();
     const id = String(productId);
@@ -121,8 +139,20 @@ export default function ChosenProduct() {
             </Box>
             <div className="divider"></div>
             <Box className={"button-box"}>
-              <button className="btn1">View Card</button>
-              <button className="btn2">Add to Card</button>
+              <Button className="btn1" onClick={handleViewCard}>
+                View Card
+              </Button>
+              <Button
+                className="btn2"
+                onClick={() =>
+                  handleAddCard({
+                    productId: chosenProduct._id,
+                    basketQuantity: 1,
+                  })
+                }
+              >
+                Add to Card
+              </Button>
             </Box>
             <div className="divider"></div>
             <Box className={"desc"}>

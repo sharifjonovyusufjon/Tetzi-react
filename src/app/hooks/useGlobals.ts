@@ -1,9 +1,12 @@
 import { createContext, useContext } from "react";
 import { Member } from "../../lib/types/member";
+import { BasketInput } from "../../lib/types/basket";
 
 interface GlobalInterface {
   authMember: Member | null;
   setAuthMember: (member: Member | null) => void;
+  addBasket: BasketInput;
+  setAddBasket: (card: BasketInput) => void;
 }
 
 export const GlobalContext = createContext<GlobalInterface | undefined>(

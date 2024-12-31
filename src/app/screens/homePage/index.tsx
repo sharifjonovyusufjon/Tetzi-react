@@ -20,7 +20,11 @@ const actionDispatch = (dispatch: Dispatch) => ({
   setJournal: (data: Journal[]) => dispatch(setJournal(data)),
 });
 
-export default function HomePage() {
+interface HomePage {
+  addToCard: () => void;
+}
+export default function HomePage(props: HomePage) {
+  const { addToCard } = props;
   const { setBestSeller, setJournal } = actionDispatch(useDispatch());
 
   useEffect(() => {
@@ -45,7 +49,7 @@ export default function HomePage() {
     <div className={"homepage"}>
       <Navbar />
       <ShopCategories />
-      <BestSeller />
+      <BestSeller addToCard={addToCard} />
       <SaleShop />
       <BrandWe />
       <Journals />

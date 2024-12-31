@@ -11,14 +11,16 @@ import Header from "./components/header";
 import "../css/header.css";
 import "../css/footer.css";
 import "../css/common.css";
+import useCard from "./hooks/useCard";
 
 export default function App() {
+  const { addToCard } = useCard();
   return (
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/shop/*" element={<ShopPage />} />
+        <Route path="/" element={<HomePage addToCard={addToCard}/>} />
+        <Route path="/shop/*" element={<ShopPage addToCard={addToCard} />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/journal/*" element={<JournalPage />} />

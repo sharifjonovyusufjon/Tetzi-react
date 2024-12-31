@@ -20,6 +20,8 @@ import {
 } from "../../../lib/enums/product.enum";
 import { T } from "../../../lib/types/common";
 import { useNavigate } from "react-router-dom";
+import { useGlobals } from "../../hooks/useGlobals";
+import { BasketInput } from "../../../lib/types/basket";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setGetProducts: (data: Product[]) => dispatch(setGetProducts(data)),
@@ -32,7 +34,13 @@ const getProductsRetrieve = createSelector(
   })
 );
 
-export default function Products() {
+interface ProductProps {
+  addToCard: () => void;
+}
+
+export default function Products(props: ProductProps) {
+  const { addToCard } = props;
+  const { addBasket, setAddBasket } = useGlobals();
   const navigate = useNavigate();
   const { setGetProducts } = actionDispatch(useDispatch());
   const { getProducts } = useSelector(getProductsRetrieve);
@@ -52,6 +60,12 @@ export default function Products() {
   }, [productInput]);
 
   /* Handlers */
+
+  const handleAddCard = async (input: BasketInput) => {
+    setAddBasket({ ...input });
+    addToCard();
+    console.log("add", addBasket);
+  };
 
   const chosenProduct = (id: string) => {
     navigate(`/shop/${id}`);
@@ -326,7 +340,17 @@ export default function Products() {
                           <Box className={"card-badge1"}>New</Box>
                         )}
                         <Stack className="card-button">
-                          <Button className="button">Add to Card</Button>
+                          <Button
+                            className="button"
+                            onClick={() =>
+                              handleAddCard({
+                                productId: ele._id,
+                                basketQuantity: 1,
+                              })
+                            }
+                          >
+                            Add to Card
+                          </Button>
                           <Button
                             className="button"
                             onClick={() => chosenProduct(ele._id)}

@@ -2,6 +2,7 @@ import React, { ReactNode, useState } from "react";
 import Cookies from "universal-cookie";
 import { Member } from "../../lib/types/member";
 import { GlobalContext } from "../hooks/useGlobals";
+import { BasketInput } from "../../lib/types/basket";
 
 const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const cookies = new Cookies();
@@ -12,11 +13,18 @@ const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       ? JSON.parse(localStorage.getItem("memberData") as string)
       : null
   );
-  
+
+  const [addBasket, setAddBasket] = useState<BasketInput>({
+    productId: "",
+    basketQuantity: 0,
+  });
+
   console.log("=== verify ===");
 
   return (
-    <GlobalContext.Provider value={{ authMember, setAuthMember }}>
+    <GlobalContext.Provider
+      value={{ authMember, setAuthMember, addBasket, setAddBasket }}
+    >
       {children}
     </GlobalContext.Provider>
   );

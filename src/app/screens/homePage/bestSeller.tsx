@@ -6,14 +6,27 @@ import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
 import { serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
+import { useGlobals } from "../../hooks/useGlobals";
+import { BasketInput } from "../../../lib/types/basket";
 
 const bestSellerRetrieve = createSelector(retrieveBestSeller, (bestSeller) => ({
   bestSeller,
 }));
 
-export default function BestSeller() {
+interface BestSeller {
+  addToCard: () => void;
+}
+export default function BestSeller(props: BestSeller) {
+  const { addToCard } = props;
   const navigate = useNavigate();
+  const { addBasket, setAddBasket } = useGlobals();
   const { bestSeller } = useSelector(bestSellerRetrieve);
+
+  const handleAddCard = async (input: BasketInput) => {
+    setAddBasket({ ...input });
+    addToCard();
+    console.log("add", addBasket);
+  };
 
   const chosenProduct = (id: string) => {
     navigate(`/shop/${id}`);
@@ -41,7 +54,17 @@ export default function BestSeller() {
                         <Box className={"card-badge1"}>New</Box>
                       )}
                       <Stack className="card-button">
-                        <Button className="button">Add to Card</Button>
+                        <Button
+                          className="button"
+                          onClick={() =>
+                            handleAddCard({
+                              productId: ele._id,
+                              basketQuantity: 1,
+                            })
+                          }
+                        >
+                          Add to Card
+                        </Button>
                         <Button
                           className="button"
                           onClick={() => chosenProduct(ele._id)}

@@ -33,7 +33,7 @@ const getBasketRetrieve = createSelector(retrieveGetBaskets, (getBaskets) => ({
 }));
 
 export default function Card() {
-  const { authMember } = useGlobals();
+  const { authMember, addBasket, setAddBasket } = useGlobals();
   const navigate = useNavigate();
   const { setGetOrders, setGetBaskets } = actionDispatch(useDispatch());
   const { getOrders } = useSelector(getOrdersRetrieve);
@@ -42,14 +42,9 @@ export default function Card() {
     return acc + item.basketTotal;
   }, 0);
 
-  const [addBasket, setAddBasket] = useState<BasketInput>({
-    productId: "",
-    basketQuantity: 0,
-  });
   const [removeBasket, setRemoveBasket] = useState<UpdateBasketInput>();
 
   useEffect(() => {
-    handleBasketAdd();
     const basketService = new BasketService();
     basketService
       .getAllBasket()
@@ -57,15 +52,17 @@ export default function Card() {
       .catch((err) => console.log(err));
   }, [addBasket, removeBasket]);
 
-  const handleBasketAdd = async () => {
-    try {
-      const basketService = new BasketService();
-      const result = await basketService.createBasket(addBasket);
-      await sweetTopSmallSuccessAlert("Add successfully!", 700);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  useEffect(() => {
+    const basketService = new BasketService();
+    console.log("addBasket", addBasket);
+    basketService
+      .createBasket(addBasket)
+      .then((data) => {
+        sweetTopSmallSuccessAlert("Add successfully!", 700);
+      })
+      .catch((err) => console.log(err));
+  }, [addBasket]);
+
   const handleBasketRemove = async (removeBasket: UpdateBasketInput) => {
     try {
       setRemoveBasket({ ...removeBasket });

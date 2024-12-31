@@ -475,7 +475,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
 }
 
 .card .card-item .card-map .item .iproduct .ibtn {
@@ -496,6 +495,7 @@
 }
 
 .card .card-item .card-map .item .iproduct .itext {
+  margin-left: 10px;
   font-family: "Nunito";
   font-size: 16px;
   font-weight: 700;
