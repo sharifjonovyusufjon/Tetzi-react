@@ -9,11 +9,18 @@ import { retrieveChosenProduct } from "./selector";
 import { createSelector } from "reselect";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { serverApi } from "../../../lib/config";
+import { Messages, serverApi } from "../../../lib/config";
 import ProductService from "../../services/ProductService";
 import { BasketInput } from "../../../lib/types/basket";
 import { useGlobals } from "../../hooks/useGlobals";
-import { sweetErrorHandlingAuth } from "../../../lib/sweetAlert";
+import {
+  sweetErrorHandlingAuth,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
+import CommitService from "../../services/CommitService";
+import { CommentGroup } from "../../../lib/enums/comment.enum";
+import { CommentInput } from "../../../lib/types/comment";
+import { T } from "../../../lib/types/common";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
@@ -38,6 +45,8 @@ export default function ChosenProduct(props: ChosenProductProps) {
   const { chosenProduct } = useSelector(chosenProductRetrieve);
 
   const [desc, setDesc] = useState<boolean>(true);
+  const [commitRef, setCommitRef] = useState<boolean>(false);
+  const [newCommit, setNewCommit] = useState<string>("");
   const descToggle = () => {
     setDesc((pre) => !pre);
   };
@@ -98,6 +107,33 @@ export default function ChosenProduct(props: ChosenProductProps) {
     navigate("/user/card");
   };
 
+  const handleNewCommit = (e: T) => {
+    setNewCommit(e.target.value);
+  };
+
+  const handleCommit = async () => {
+    try {
+      const commentService = new CommitService();
+      if (newCommit === "") {
+        throw new Error(Messages.error3);
+      }
+      const id: string = productId as string;
+      const input: CommentInput = {
+        commentContext: newCommit,
+        commentGroup: CommentGroup.PRODUCT,
+        commentRefId: id,
+        memberId: "",
+      };
+      const result = await commentService.createCommit(input);
+      await sweetTopSmallSuccessAlert("Comment successfully!", 700);
+      setNewCommit("");
+      setCommitRef(!commitRef);
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandlingAuth("Please write comment!").then();
+    }
+  };
+
   useEffect(() => {
     const productService = new ProductService();
     const id = String(productId);
@@ -105,7 +141,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
       .getProduct(id)
       .then((data) => setChosenProduct(data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [commitRef]);
   if (!chosenProduct) return null;
   return (
     <div className="chosen-product-page">
@@ -149,11 +185,14 @@ export default function ChosenProduct(props: ChosenProductProps) {
               </Button>
               <Button
                 className="btn2"
-                onClick={authMember ? () =>
-                  handleAddCard({
-                    productId: chosenProduct._id,
-                    basketQuantity: 1,
-                  }) : handleAuth
+                onClick={
+                  authMember
+                    ? () =>
+                        handleAddCard({
+                          productId: chosenProduct._id,
+                          basketQuantity: 1,
+                        })
+                    : handleAuth
                 }
               >
                 Add to Card
@@ -171,11 +210,11 @@ export default function ChosenProduct(props: ChosenProductProps) {
           <Box className={"title"}>Comments</Box>
           <Stack className="boxes">
             {chosenProduct?.productData ? (
-              chosenProduct?.productData.map((comment, index) => {
+              chosenProduct?.productData.map((comment: any) => {
                 return (
-                  <Box key={index} className={"comm"}>
-                    <span>John Ford</span>
-                    <p>Commnet Text</p>
+                  <Box key={comment._id} className={"comm"}>
+                    <span>{comment.memberData.memberFirstName}</span>
+                    <p>{comment.commentContext}</p>
                   </Box>
                 );
               })
@@ -188,8 +227,15 @@ export default function ChosenProduct(props: ChosenProductProps) {
           </Stack>
           <Stack className="review">
             <span>Your commet</span>
-            <input type="text" placeholder="Your product discussion ...?" />
-            <button>Post</button>
+            <input
+              type="text"
+              value={newCommit}
+              placeholder={"Your product discussion ...?"}
+              onChange={handleNewCommit}
+            />
+            <Button onClick={authMember ? handleCommit : handleAuth}>
+              Post
+            </Button>
           </Stack>
         </Stack>
       </Container>
