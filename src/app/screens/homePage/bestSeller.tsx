@@ -12,6 +12,8 @@ import {
   sweetErrorHandling,
   sweetErrorHandlingAuth,
 } from "../../../lib/sweetAlert";
+import MarkUnreadChatAltIcon from "@mui/icons-material/MarkUnreadChatAlt";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const bestSellerRetrieve = createSelector(retrieveBestSeller, (bestSeller) => ({
   bestSeller,
@@ -56,6 +58,18 @@ export default function BestSeller(props: BestSeller) {
                         backgroundImage: `url(${imagePath})`,
                       }}
                     >
+                      <Stack className="comment-view">
+                        <Stack className="cv" color={"white"}>
+                          <MarkUnreadChatAltIcon
+                            sx={{ color: "rgb(134, 212, 245)" }}
+                          />
+                          {ele.productComments}
+                        </Stack>
+                        <Stack className="cv" color={"white"}>
+                          <VisibilityIcon sx={{ color: "#FFB8CC" }} />
+                          {ele.productViews}
+                        </Stack>
+                      </Stack>
                       {ele.productColor === "RED" ? (
                         <Box className={"card-badge"}>{"Sale"}</Box>
                       ) : (

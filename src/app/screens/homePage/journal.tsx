@@ -4,6 +4,8 @@ import { createSelector } from "reselect";
 import { useSelector } from "react-redux";
 import { serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
+import MarkUnreadChatAltIcon from "@mui/icons-material/MarkUnreadChatAlt";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const journalRetrieve = createSelector(retrieveJournal, (journal) => ({
   journal,
@@ -37,7 +39,20 @@ export default function Journals() {
                       sx={{
                         backgroundImage: `url(${imagePath})`,
                       }}
-                    ></Box>
+                    >
+                      <Stack className="comment-view">
+                        <Stack className="cv" color={"white"}>
+                          <MarkUnreadChatAltIcon
+                            sx={{ color: "rgb(134, 212, 245)" }}
+                          />
+                          {ele.journalComments}
+                        </Stack>
+                        <Stack className="cv" color={"white"}>
+                          <VisibilityIcon sx={{ color: "#FFB8CC" }} />
+                          {ele.journalViews}
+                        </Stack>
+                      </Stack>
+                    </Box>
                     <Stack className={"card-text"}>
                       <Box className={"journal-category"}>
                         {ele.journalCategory}
