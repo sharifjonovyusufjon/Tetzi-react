@@ -3,8 +3,10 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PageviewIcon from "@mui/icons-material/Pageview";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
+import { useGlobals } from "../../hooks/useGlobals";
 
 export default function Header() {
+  const { authMember } = useGlobals();
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/user/card");
@@ -37,6 +39,18 @@ export default function Header() {
                 Shop
               </NavLink>
             </Box>
+            {authMember ? (
+              <Box>
+                <NavLink
+                  to="/orders"
+                  className={({ isActive }) =>
+                    isActive ? "menu-text underline" : "menu-text"
+                  }
+                >
+                  Orders
+                </NavLink>
+              </Box>
+            ) : null}
             <Box>
               <NavLink
                 to={"/about"}
