@@ -38,7 +38,7 @@ export default function HomePage(props: HomePage) {
       .catch((err) => console.log("Err, getBestSeller", err));
 
     journalService
-      .getJournals({ page: 1, limit: 4, search: {} })
+      .getJournals({ page: 1, limit: 4 })
       .then((data) => {
         setJournal(data);
       })

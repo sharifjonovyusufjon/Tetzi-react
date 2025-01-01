@@ -1,47 +1,105 @@
 import { Box, Button, Container, Stack } from "@mui/material";
 import OtherJournal from "../../components/header/otherJournal";
+import { Dispatch } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { createSelector } from "reselect";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import JournalService from "../../services/JournalService";
+import { T } from "../../../lib/types/common";
+import { useNavigate, useParams } from "react-router-dom";
+import { setChosenJournal } from "./slice";
+import { Journal } from "../../../lib/types/journal";
+import { retrieveChosenJournal } from "./select";
+import { Messages, serverApi } from "../../../lib/config";
+import { useGlobals } from "../../hooks/useGlobals";
+import {
+  sweetErrorHandlingAuth,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
+import { CommentGroup } from "../../../lib/enums/comment.enum";
+import { CommentInput } from "../../../lib/types/comment";
+import CommitService from "../../services/CommitService";
+
+const actionDispatch = (dispatch: Dispatch) => ({
+  setChosenJournal: (data: Journal) => dispatch(setChosenJournal(data)),
+});
+
+const chosenJournalRetrieve = createSelector(
+  retrieveChosenJournal,
+  (chosenJournal) => ({
+    chosenJournal,
+  })
+);
 
 export default function ChosenJournal() {
-  const t = [7];
+  const { setChosenJournal } = actionDispatch(useDispatch());
+  const { chosenJournal } = useSelector(chosenJournalRetrieve);
+  const [newCommit, setNewCommit] = useState<string>("");
+  const [commitRef, setCommitRef] = useState<boolean>(false);
+  const { authMember } = useGlobals();
+  const { journalId } = useParams();
+
+  const handleCommit = async () => {
+    try {
+      const commentService = new CommitService();
+      if (newCommit === "") {
+        throw new Error(Messages.error3);
+      }
+      const id: string = journalId as string;
+      const input: CommentInput = {
+        commentContext: newCommit,
+        commentGroup: CommentGroup.JOURNAL,
+        commentRefId: id,
+        memberId: "",
+      };
+      const result = await commentService.createCommit(input);
+      await sweetTopSmallSuccessAlert("Comment successfully!", 700);
+      setNewCommit("");
+      setCommitRef(!commitRef);
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandlingAuth("Please write comment!").then();
+    }
+  };
+
+  useEffect(() => {
+    const journalService = new JournalService();
+    const id = String(journalId);
+    journalService
+      .getJournal(id)
+      .then((data) => setChosenJournal(data))
+      .catch((err) => console.log(err));
+  }, [commitRef]);
+
+  const handleNewCommit = (e: T) => {
+    setNewCommit(e.target.value);
+  };
+
+  const handleAuth = () => {
+    sweetErrorHandlingAuth("Please login first!");
+  };
+  const imagePath = `${serverApi}/${chosenJournal?.journalImage}`;
+  if (!chosenJournal) return null;
   return (
     <div className="journal-chosen-page">
       <OtherJournal />
       <Container className="container">
         <Stack className="menu-box">
-          <img src="/img/baby.jpg" alt="" />
-          <span>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
-          </span>
-          <p>
-            On the other hand, we denounce with righteous indignation and
-            dislike men who are so beguiled and demoralized by the charms of
-            pleasure of the moment, so blinded by desire, that they cannot
-            foresee the pain and trouble that are bound to ensue; and equal
-            blame belongs to those who fail in their duty through weakness of
-            will, which is the same as saying through shrinking from toil and
-            pain. These cases are perfectly simple and easy to distinguish. In a
-            free hour, when our power of choice is untrammelled and when nothing
-            prevents our being able to do what we like best, every pleasure is
-            to be welcomed and every pain avoided. But in certain circumstances
-            and owing to the claims of duty or the obligations of business it
-            will frequently occur that pleasures have to be repudiated and
-            annoyances accepted. The wise man therefore always holds in these
-            matters to this principle of selection: he rejects pleasures to
-            secure other greater pleasures, or else he endures pains to avoid
-            worse pains.
-          </p>
+          <img src={imagePath} alt="" />
+          <span>{chosenJournal?.journalTitle}</span>
+          <p>{chosenJournal?.journalContext}</p>
         </Stack>
         <Stack className="comment-box">
           <Stack className="rewiev-box">
             <Box className={"title"}>Comments</Box>
             <Stack className="boxes">
-              {t ? (
-                [1, 2].map((comment: any) => {
+              {chosenJournal?.journalData ? (
+                chosenJournal.journalData.map((comment: any) => {
                   return (
-                    <Box key={1} className={"comm"}>
-                      <span>{"name"}</span>
-                      <p>{"matn"}</p>
+                    <Box key={comment._id} className={"comm"}>
+                      <span>{comment.memberData.memberFirstName}</span>
+                      <p>{comment.commentContext}</p>
                     </Box>
                   );
                 })
@@ -56,11 +114,13 @@ export default function ChosenJournal() {
               <span>Your commet</span>
               <input
                 type="text"
-                // value={newCommit}
+                value={newCommit}
                 placeholder={"Your product discussion ...?"}
-                // onChange={handleNewCommit}
+                onChange={handleNewCommit}
               />
-              <Button>Post</Button>
+              <Button onClick={authMember ? handleCommit : handleAuth}>
+                Post
+              </Button>
             </Stack>
           </Stack>
         </Stack>
