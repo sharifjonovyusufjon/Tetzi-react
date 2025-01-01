@@ -10,6 +10,7 @@ export interface AppRootState {
   homePage: HomePageState;
   shopPage: ShopPageState;
   userPage: UserPageState;
+  journalPage: JournalPageState;
 }
 
 export interface HomePageState {
@@ -26,4 +27,9 @@ export interface ShopPageState {
 export interface UserPageState {
   getOrders: Order[];
   getBaskets: Basket[];
+}
+
+export interface JournalPageState {
+  getJournals: Journal[];
+  chosenJournal: Journal | null;
 }

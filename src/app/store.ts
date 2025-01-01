@@ -3,6 +3,7 @@ import HomePageReducer from "./screens/homePage/slice";
 import reduxLogger from "redux-logger";
 import ShopPageReducer from "./screens/shopPage/slice";
 import UserPageReducer from "./screens/userPage/slice";
+import JournalPageReducer from "./screens/journalPage/slice";
 
 export const store = configureStore({
   //
@@ -12,6 +13,7 @@ export const store = configureStore({
     homePage: HomePageReducer,
     shopPage: ShopPageReducer,
     userPage: UserPageReducer,
+    journalPage: JournalPageReducer,
   },
 });
 
