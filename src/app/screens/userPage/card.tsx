@@ -17,7 +17,11 @@ import {
 import { Product } from "../../../lib/types/product";
 import { useEffect, useState } from "react";
 import BasketService from "../../services/BasketService";
-import { sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import {
+  sweetErrorHandlingAuth,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
+import OrderService from "../../services/OrderService";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setGetOrders: (data: Order[]) => dispatch(setGetOrders(data)),
@@ -74,8 +78,22 @@ export default function Card() {
     }
   };
 
+  const handleAuth = () => {
+    sweetErrorHandlingAuth("Please login first!");
+  };
+
   const handleAddState = (input: BasketInput) => {
     setAddBasket({ ...input });
+  };
+
+  const handleOrder = async () => {
+    try {
+      const orderService = new OrderService();
+      await orderService.createOrder();
+      await sweetTopSmallSuccessAlert("Orders successfully!", 700);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   if (!authMember) {
@@ -163,7 +181,12 @@ export default function Card() {
               <span className="tt">Subtotal</span>
               <p className="pp">${`${subTota}`}.00 $</p>
             </Stack>
-            <Button className="total-button">Proceed to Checkout</Button>
+            <Button
+              className="total-button"
+              onClick={authMember ? handleOrder : handleAuth}
+            >
+              Proceed to Checkout
+            </Button>
           </Stack>
         </Stack>
       </Container>
