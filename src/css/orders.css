@@ -1,0 +1,336 @@
+.orders-page {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255);
+}
+
+.orders-page .container {
+  margin-top: 120px;
+  margin-bottom: 90px;
+  width: 100%;
+  height: auto;
+}
+
+.orders-page .container .tab-panel {
+  width: 100%;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.orders-page .container .tab-panel .aria-label {
+  width: 100%;
+  border: 1px solid #f6f6f6;
+}
+
+.orders-page .container .tab-panel .aria-label .tab-text {
+  font-family: "Nunito Black";
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 52px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.orders-page .container .context .order-box {
+  margin-bottom: 0;
+  padding: 0;
+  /* margin-top: 90px; */
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orders-page .container .context .order-box .pagination {
+  margin-top: 120px;
+  width: 100%;
+  height: 36px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.orders-page .container .context .order-box .pagination .page {
+  width: 36px;
+  height: 36px;
+  font-family: "Nunito";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+  border: 1px solid #f6f6f6;
+  border-radius: 4px;
+}
+
+.orders-page .container .context .order-box .pagination .page:active {
+  font-family: "Nunito";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  border-radius: 4px;
+  background: rgb(255, 216, 129);
+}
+
+.orders-page .container .context .order-box .orders {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.orders-page .container .context .order-box .orders .no-order {
+  width: 100%;
+  height: 250px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito Black";
+  font-size: 35px;
+  font-weight: 900;
+  line-height: 52px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(134, 212, 245);
+}
+
+.orders-page .container .context .order-box .orders .yes-order {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 45px;
+}
+
+.orders-page .container .context .order-box .orders .yes-order .order-one {
+  width: 100%;
+  height: 350px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.orders-page
+  .container
+  .context
+  .order-box
+  .orders
+  .yes-order
+  .order-one
+  .boxes {
+  position: relative;
+  padding: 20px;
+  width: 100%;
+  height: 290px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #f6f6f6;
+  border-radius: 7px;
+  box-shadow: rgba(206, 213, 218, 0.3) 0px 1px 2px 0px,
+    rgba(226, 229, 231, 0.15) 0px 1px 3px 1px;
+  overflow: auto;
+}
+
+.orders-page
+  .container
+  .context
+  .order-box
+  .orders
+  .yes-order
+  .order-one
+  .boxes
+  .item {
+  position: relative;
+  width: 100%;
+  min-height: 70px;
+  max-height: 70px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.item .text {
+  width: 450px;
+  height: 70px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item .text .no-text {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgba(255, 0, 0, 0.49);
+}
+
+.item .image {
+  width: 400px;
+  height: 70px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 35px;
+}
+
+.item .image img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.item .image .super-text {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.orders-page
+  .container
+  .context
+  .order-box
+  .orders
+  .yes-order
+  .order-one
+  .total {
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 7px;
+  border: 1px solid #f6f6f6;
+  box-shadow: rgba(206, 213, 218, 0.3) 0px 1px 2px 0px,
+    rgba(226, 229, 231, 0.15) 0px 1px 3px 1px;
+}
+
+.orders-page
+  .container
+  .context
+  .order-box
+  .orders
+  .yes-order
+  .order-one
+  .total
+  .total-text {
+  width: 800px;
+  height: 50px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+}
+
+.orders-page
+  .container
+  .context
+  .order-box
+  .orders
+  .yes-order
+  .order-one
+  .total
+  .buttons {
+  width: 450px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.orders-page
+  .container
+  .context
+  .order-box
+  .orders
+  .yes-order
+  .order-one
+  .total
+  .buttons
+  .btn1 {
+  width: 200px;
+  height: 50px;
+
+  font-family: "Nunito";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: rgb(255, 184, 204);
+}
+
+.orders-page
+  .container
+  .context
+  .order-box
+  .orders
+  .yes-order
+  .order-one
+  .total
+  .buttons
+  .btn2 {
+  width: 200px;
+  height: 50px;
+
+  font-family: "Nunito";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: rgb(134, 212, 245);
+}
