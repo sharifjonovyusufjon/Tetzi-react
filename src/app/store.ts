@@ -4,6 +4,7 @@ import reduxLogger from "redux-logger";
 import ShopPageReducer from "./screens/shopPage/slice";
 import UserPageReducer from "./screens/userPage/slice";
 import JournalPageReducer from "./screens/journalPage/slice";
+import OrdersPageReducer from "./screens/ordersPage/slice";
 
 export const store = configureStore({
   //
@@ -14,6 +15,7 @@ export const store = configureStore({
     shopPage: ShopPageReducer,
     userPage: UserPageReducer,
     journalPage: JournalPageReducer,
+    ordersPage: OrdersPageReducer,
   },
 });
 

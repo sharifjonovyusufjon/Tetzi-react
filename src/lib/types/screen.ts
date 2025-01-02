@@ -11,6 +11,7 @@ export interface AppRootState {
   shopPage: ShopPageState;
   userPage: UserPageState;
   journalPage: JournalPageState;
+  ordersPage: OrdersPageState;
 }
 
 export interface HomePageState {
@@ -32,4 +33,10 @@ export interface UserPageState {
 export interface JournalPageState {
   getJournals: Journal[];
   chosenJournal: Journal | null;
+}
+
+export interface OrdersPageState {
+  pausedOrders: Order[];
+  processOrders: Order[];
+  finishOrders: Order[];
 }

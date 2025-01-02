@@ -7,9 +7,53 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import { createSelector } from "reselect";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
 import "../../../css/orders.css";
+import { Order } from "../../../lib/types/order";
+import { setFinishOrders, setPausedOrders, setProcessOrders } from "./slice";
+import {
+  retrieveFinishOrders,
+  retrievePausedOrders,
+  retrieveProcessOrders,
+} from "./selector";
+
+const actionDispatch = (dispatch: Dispatch) => ({
+  setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
+  setProcessOrders: (data: Order[]) => dispatch(setProcessOrders(data)),
+  setFinishOrders: (data: Order[]) => dispatch(setFinishOrders(data)),
+});
+
+const pausedOrdersRetrieve = createSelector(
+  retrievePausedOrders,
+  (pausedOrders) => ({
+    pausedOrders,
+  })
+);
+
+const processOrdersRetrieve = createSelector(
+  retrieveProcessOrders,
+  (processOrders) => ({
+    processOrders,
+  })
+);
+
+const finishOrdersRetrieve = createSelector(
+  retrieveFinishOrders,
+  (finishOrders) => ({
+    finishOrders,
+  })
+);
 
 export default function OrdersPage() {
+  const { setPausedOrders, setProcessOrders, setFinishOrders } = actionDispatch(
+    useDispatch()
+  );
+  const { pausedOrders } = useSelector(pausedOrdersRetrieve);
+  const { processOrders } = useSelector(processOrdersRetrieve);
+  const { finishOrders } = useSelector(finishOrdersRetrieve);
   const [value, setValue] = React.useState("1");
   const [page, setPage] = React.useState<number>(1);
 
