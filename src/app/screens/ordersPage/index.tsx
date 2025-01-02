@@ -1,7 +1,7 @@
 import { Button, Container, Stack } from "@mui/material";
 import OtherOrders from "../../components/header/otherOrder";
 import Tabs from "@mui/material/Tabs";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -12,13 +12,16 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import "../../../css/orders.css";
-import { Order } from "../../../lib/types/order";
+import { Order, OrderInQuiry } from "../../../lib/types/order";
 import { setFinishOrders, setPausedOrders, setProcessOrders } from "./slice";
 import {
   retrieveFinishOrders,
   retrievePausedOrders,
   retrieveProcessOrders,
 } from "./selector";
+import OrderService from "../../services/OrderService";
+import { OrderStatus } from "../../../lib/enums/order.enum";
+import { serverApi } from "../../../lib/config";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
@@ -56,10 +59,43 @@ export default function OrdersPage() {
   const { finishOrders } = useSelector(finishOrdersRetrieve);
   const [value, setValue] = React.useState("1");
   const [page, setPage] = React.useState<number>(1);
+  const [pausedInput, setPausedInput] = useState<OrderInQuiry>({
+    page: page,
+    limit: 4,
+    orderStatus: OrderStatus.PAUSE,
+  });
+  const [processInput, setProcessInput] = useState<OrderInQuiry>({
+    page: page,
+    limit: 4,
+    orderStatus: OrderStatus.PROCESS,
+  });
+  const [finishInput, setFinishInput] = useState<OrderInQuiry>({
+    page: page,
+    limit: 4,
+    orderStatus: OrderStatus.FINISH,
+  });
 
   useEffect(() => {
     setPage(1);
   }, [value]);
+
+  useEffect(() => {
+    const orderService = new OrderService();
+    orderService
+      .getAllOrders(pausedInput)
+      .then((data) => setPausedOrders(data))
+      .catch((err) => console.log(err));
+
+    orderService
+      .getAllOrders(processInput)
+      .then((data) => setProcessOrders(data))
+      .catch((err) => console.log(err));
+
+    orderService
+      .getAllOrders(finishInput)
+      .then((data) => setFinishOrders(data))
+      .catch((err) => console.log(err));
+  }, [page]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -88,27 +124,39 @@ export default function OrdersPage() {
             </Stack>
             <TabPanel value="1" className="order-box">
               <Stack className="orders">
-                {getOrders.length === 0 ? (
+                {pausedOrders.length === 0 ? (
                   <Stack className="no-order">You is not orders</Stack>
                 ) : (
                   <Stack className="yes-order">
-                    {getOrders.map((order, index) => {
+                    {pausedOrders.map((order) => {
                       return (
-                        <Stack className="order-one">
+                        <Stack className="order-one" key={order._id}>
                           <Stack className="boxes">
-                            {order.map((orderItem, index) => {
+                            {order.orderItemData.map((orderItem: any) => {
+                              const imagePath = `${serverApi}/${orderItem.productData.productImages[0]}`;
                               return (
-                                <Stack className="item">
+                                <Stack className="item" key={orderItem._id}>
                                   <Stack className="image">
-                                    <img src="/img/baby.jpg" alt="" />
-                                    <p className="super-text">Product Name</p>
+                                    <img src={imagePath} alt="" />
+                                    <p className="super-text">
+                                      {orderItem.productData.productName}
+                                    </p>
                                   </Stack>
                                   <Stack className="text">
-                                    <span className="no-text">$44.00</span>
+                                    <span className="no-text">
+                                      ${orderItem.productData.productPrice}.00
+                                    </span>
                                     <span className="no-text">x</span>
-                                    <span className="no-text">2</span>
+                                    <span className="no-text">
+                                      {orderItem.itemQuantity}
+                                    </span>
                                     <span className="no-text">=</span>
-                                    <span className="no-text">$88.00</span>
+                                    <span className="no-text">
+                                      $
+                                      {orderItem.productData.productPrice *
+                                        orderItem.itemQuantity}
+                                      .00
+                                    </span>
                                   </Stack>
                                 </Stack>
                               );
@@ -117,13 +165,15 @@ export default function OrdersPage() {
                           <Stack className="total">
                             <Stack className="total-text">
                               <span>Product price</span>
-                              <span>{"$44.00"}</span>
+                              <span>
+                                ${order.orderTotal - order.orderDelivery}.00
+                              </span>
                               <span>+</span>
                               <span>Delivery cost</span>
-                              <span>{"$00.00"}</span>
+                              <span>${order.orderDelivery}.00</span>
                               <span>=</span>
                               <span>Total</span>
-                              <span>{"$44.00"}</span>
+                              <span>{order.orderTotal}</span>
                             </Stack>
                             <Stack className="buttons">
                               <Button className="btn1">Cancel</Button>
@@ -152,27 +202,39 @@ export default function OrdersPage() {
             </TabPanel>
             <TabPanel value="2" className="order-box">
               <Stack className="orders">
-                {getOrders.length === 0 ? (
+                {processOrders.length === 0 ? (
                   <Stack className="no-order">You is not orders</Stack>
                 ) : (
                   <Stack className="yes-order">
-                    {getOrders.map((order, index) => {
+                    {processOrders.map((order) => {
                       return (
-                        <Stack className="order-one">
+                        <Stack className="order-one" key={order._id}>
                           <Stack className="boxes">
-                            {order.map((orderItem, index) => {
+                            {order.orderItemData.map((orderItem: any) => {
+                              const imagePath = `${serverApi}/${orderItem.productData.productImages[0]}`;
                               return (
-                                <Stack className="item">
+                                <Stack className="item" key={orderItem._id}>
                                   <Stack className="image">
-                                    <img src="/img/baby.jpg" alt="" />
-                                    <p className="super-text">Product Name</p>
+                                    <img src={imagePath} alt="" />
+                                    <p className="super-text">
+                                      {orderItem.productData.productName}
+                                    </p>
                                   </Stack>
                                   <Stack className="text">
-                                    <span className="no-text">$44.00</span>
+                                    <span className="no-text">
+                                      ${orderItem.productData.productPrice}.00
+                                    </span>
                                     <span className="no-text">x</span>
-                                    <span className="no-text">2</span>
+                                    <span className="no-text">
+                                      {orderItem.itemQuantity}
+                                    </span>
                                     <span className="no-text">=</span>
-                                    <span className="no-text">$88.00</span>
+                                    <span className="no-text">
+                                      $
+                                      {orderItem.productData.productPrice *
+                                        orderItem.itemQuantity}
+                                      .00
+                                    </span>
                                   </Stack>
                                 </Stack>
                               );
@@ -181,13 +243,15 @@ export default function OrdersPage() {
                           <Stack className="total">
                             <Stack className="total-text">
                               <span>Product price</span>
-                              <span>{"$44.00"}</span>
+                              <span>
+                                ${order.orderTotal - order.orderDelivery}.00
+                              </span>
                               <span>+</span>
                               <span>Delivery cost</span>
-                              <span>{"$00.00"}</span>
+                              <span>${order.orderDelivery}.00</span>
                               <span>=</span>
                               <span>Total</span>
-                              <span>{"$44.00"}</span>
+                              <span>{order.orderTotal}</span>
                             </Stack>
                             <Stack className="buttons">
                               <Button
@@ -220,27 +284,39 @@ export default function OrdersPage() {
             </TabPanel>
             <TabPanel value="3" className="order-box">
               <Stack className="orders">
-                {getOrders.length === 0 ? (
+                {finishOrders.length === 0 ? (
                   <Stack className="no-order">You is not orders</Stack>
                 ) : (
                   <Stack className="yes-order">
-                    {getOrders.map((order, index) => {
+                    {finishOrders.map((order) => {
                       return (
-                        <Stack className="order-one">
+                        <Stack className="order-one" key={order._id}>
                           <Stack className="boxes">
-                            {order.map((orderItem, index) => {
+                            {order.orderItemData.map((orderItem: any) => {
+                              const imagePath = `${serverApi}/${orderItem.productData.productImages[0]}`;
                               return (
-                                <Stack className="item">
+                                <Stack className="item" key={orderItem._id}>
                                   <Stack className="image">
-                                    <img src="/img/baby.jpg" alt="" />
-                                    <p className="super-text">Product Name</p>
+                                    <img src={imagePath} alt="" />
+                                    <p className="super-text">
+                                      {orderItem.productData.productName}
+                                    </p>
                                   </Stack>
                                   <Stack className="text">
-                                    <span className="no-text">$44.00</span>
+                                    <span className="no-text">
+                                      ${orderItem.productData.productPrice}.00
+                                    </span>
                                     <span className="no-text">x</span>
-                                    <span className="no-text">2</span>
+                                    <span className="no-text">
+                                      {orderItem.itemQuantity}
+                                    </span>
                                     <span className="no-text">=</span>
-                                    <span className="no-text">$88.00</span>
+                                    <span className="no-text">
+                                      $
+                                      {orderItem.productData.productPrice *
+                                        orderItem.itemQuantity}
+                                      .00
+                                    </span>
                                   </Stack>
                                 </Stack>
                               );
@@ -249,13 +325,15 @@ export default function OrdersPage() {
                           <Stack className="total">
                             <Stack className="total-text" marginLeft={"350px"}>
                               <span>Product price</span>
-                              <span>{"$44.00"}</span>
+                              <span>
+                                ${order.orderTotal - order.orderDelivery}.00
+                              </span>
                               <span>+</span>
                               <span>Delivery cost</span>
-                              <span>{"$00.00"}</span>
+                              <span>${order.orderDelivery}.00</span>
                               <span>=</span>
                               <span>Total</span>
-                              <span>{"$44.00"}</span>
+                              <span>{order.orderTotal}</span>
                             </Stack>
                           </Stack>
                         </Stack>

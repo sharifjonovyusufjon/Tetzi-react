@@ -1,4 +1,3 @@
-
 import { OrderStatus } from "../enums/order.enum";
 
 export interface OrderInput {
@@ -17,8 +16,7 @@ export interface Order {
 
   /* from aggregate */
 
-  orderItemData?: [];
-  productData?: [];
+  orderItemData: [OrderItem];
 }
 
 export interface OrderItemInput {
@@ -26,6 +24,7 @@ export interface OrderItemInput {
   itemPrice: number;
   orderId: string;
   productId: string;
+  productData?: [];
 }
 
 export interface OrderItem {
