@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import "../../../css/orders.css";
-import { Order, OrderInQuiry } from "../../../lib/types/order";
+import { Order, OrderInQuiry, UpdateOrder } from "../../../lib/types/order";
 import { setFinishOrders, setPausedOrders, setProcessOrders } from "./slice";
 import {
   retrieveFinishOrders,
@@ -22,6 +22,7 @@ import {
 import OrderService from "../../services/OrderService";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import { serverApi } from "../../../lib/config";
+import { sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
@@ -75,6 +76,11 @@ export default function OrdersPage() {
     orderStatus: OrderStatus.FINISH,
   });
 
+  const [updateOrder, setUpdateOrder] = useState<UpdateOrder>({
+    orderId: "",
+    orderStatus: OrderStatus.PAUSE,
+  });
+
   useEffect(() => {
     setPage(1);
   }, [value]);
@@ -95,14 +101,42 @@ export default function OrdersPage() {
       .getAllOrders(finishInput)
       .then((data) => setFinishOrders(data))
       .catch((err) => console.log(err));
-  }, [page]);
+
+    orderService
+      .updateOrder(updateOrder)
+      .then((data) => sweetTopSmallSuccessAlert("Successfully!", 700))
+      .catch((err) => console.log(err));
+  }, [updateOrder, pausedInput, processInput, finishInput]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
-  const handlePage = (input: number) => {
-    setPage(input);
+  const handlePagePause = (input: number) => {
+    pausedInput.page = input;
+    setPausedInput({ ...pausedInput });
+  };
+
+  const handlePageProcess = (input: number) => {
+    processInput.page = input;
+    setPausedInput({ ...processInput });
+  };
+
+  const handlePageFinish = (input: number) => {
+    finishInput.page = input;
+    setPausedInput({ ...finishInput });
+  };
+
+  const handleFinish = (id: string) => {
+    updateOrder.orderId = id;
+    updateOrder.orderStatus = OrderStatus.FINISH;
+    setUpdateOrder({ ...updateOrder });
+  };
+
+  const handleProcess = (id: string) => {
+    updateOrder.orderId = id;
+    updateOrder.orderStatus = OrderStatus.PROCESS;
+    setUpdateOrder({ ...updateOrder });
   };
 
   const getOrders = [
@@ -177,7 +211,12 @@ export default function OrdersPage() {
                             </Stack>
                             <Stack className="buttons">
                               <Button className="btn1">Cancel</Button>
-                              <Button className="btn2">Process</Button>
+                              <Button
+                                className="btn2"
+                                onClick={() => handleProcess(order._id)}
+                              >
+                                Process
+                              </Button>
                             </Stack>
                           </Stack>
                         </Stack>
@@ -192,7 +231,7 @@ export default function OrdersPage() {
                     <Button
                       className="page"
                       key={index}
-                      onClick={() => handlePage(num)}
+                      onClick={() => handlePagePause(num)}
                     >
                       {num}
                     </Button>
@@ -257,6 +296,7 @@ export default function OrdersPage() {
                               <Button
                                 className="btn2"
                                 sx={{ marginLeft: "250px" }}
+                                onClick={() => handleFinish(order._id)}
                               >
                                 Finish
                               </Button>
@@ -274,7 +314,7 @@ export default function OrdersPage() {
                     <Button
                       className="page"
                       key={index}
-                      onClick={() => handlePage(num)}
+                      onClick={() => handlePageProcess(num)}
                     >
                       {num}
                     </Button>
@@ -348,7 +388,7 @@ export default function OrdersPage() {
                     <Button
                       className="page"
                       key={index}
-                      onClick={() => handlePage(num)}
+                      onClick={() => handlePageFinish(num)}
                     >
                       {num}
                     </Button>

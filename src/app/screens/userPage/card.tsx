@@ -46,6 +46,7 @@ export default function Card() {
     return acc + item.basketTotal;
   }, 0);
 
+  const [orderNew, setOrderNew] = useState<boolean>(false);
   const [removeBasket, setRemoveBasket] = useState<UpdateBasketInput>();
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export default function Card() {
       .getAllBasket()
       .then((data) => setGetBaskets(data))
       .catch((err) => console.log(err));
-  }, [addBasket, removeBasket]);
+  }, [addBasket, removeBasket, orderNew]);
 
   useEffect(() => {
     const basketService = new BasketService();
@@ -90,6 +91,7 @@ export default function Card() {
     try {
       const orderService = new OrderService();
       await orderService.createOrder();
+      await setOrderNew(!orderNew);
       await sweetTopSmallSuccessAlert("Orders successfully!", 700);
     } catch (err) {
       console.log(err);
