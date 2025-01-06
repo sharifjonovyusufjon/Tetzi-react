@@ -4,8 +4,8 @@ import "../../../css/about.css";
 import { Box } from "lucide-react";
 import OtherAbout from "../../components/header/otherAbout";
 
-const imgPath_1: string = "/img/baby.jpg";
-const imgPath_2: string = "/img/baby.jpg";
+const imgPath_1: string = "/img/stroller.jpg";
+const imgPath_2: string = "/img/clothes.jpg";
 
 export default function AboutPage() {
   return (

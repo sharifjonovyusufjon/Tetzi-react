@@ -49,7 +49,7 @@ export default function Products(props: ProductProps) {
   const { getProducts } = useSelector(getProductsRetrieve);
   const [productInput, setProductInput] = useState<ProductInQuery>({
     page: 1,
-    limit: 6,
+    limit: 15,
     direction: Direction.ASC,
     sort: "createdAt",
   });
