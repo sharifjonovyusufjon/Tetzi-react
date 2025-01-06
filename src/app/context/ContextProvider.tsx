@@ -16,7 +16,7 @@ const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const [addBasket, setAddBasket] = useState<BasketInput>({
     productId: "",
-    basketQuantity: 0,
+    basketQuantity: 1,
   });
 
   const [orderBuilder, setOrderBuilder] = useState<Date>(new Date());

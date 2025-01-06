@@ -68,9 +68,10 @@ export default function Products(props: ProductProps) {
     sweetErrorHandlingAuth("Please login first!");
   };
 
-  const handleAddCard = async (input: BasketInput) => {
-    setAddBasket({ ...input });
-    addToCard();
+  const handleAddCard = async (input: string) => {
+    addBasket.productId = input;
+    await setAddBasket({ ...addBasket });
+    await addToCard();
     console.log("add", addBasket);
   };
 
@@ -363,11 +364,7 @@ export default function Products(props: ProductProps) {
                             className="button"
                             onClick={
                               authMember
-                                ? () =>
-                                    handleAddCard({
-                                      productId: ele._id,
-                                      basketQuantity: 1,
-                                    })
+                                ? () => handleAddCard(ele._id)
                                 : handleAuth
                             }
                           >
