@@ -37,7 +37,8 @@ const getBasketRetrieve = createSelector(retrieveGetBaskets, (getBaskets) => ({
 }));
 
 export default function Card() {
-  const { authMember, addBasket, setAddBasket } = useGlobals();
+  const { authMember, addBasket, setAddBasket, orderBuilder, setOrderBuilder } =
+    useGlobals();
   const navigate = useNavigate();
   const { setGetOrders, setGetBaskets } = actionDispatch(useDispatch());
   const { getOrders } = useSelector(getOrdersRetrieve);
@@ -55,7 +56,7 @@ export default function Card() {
       .getAllBasket()
       .then((data) => setGetBaskets(data))
       .catch((err) => console.log(err));
-  }, [addBasket, removeBasket, orderNew]);
+  }, [addBasket, removeBasket, orderNew, orderBuilder]);
 
   useEffect(() => {
     const basketService = new BasketService();
@@ -63,6 +64,7 @@ export default function Card() {
     basketService
       .createBasket(addBasket)
       .then((data) => {
+        setOrderBuilder(new Date());
         sweetTopSmallSuccessAlert("Add successfully!", 700);
       })
       .catch((err) => console.log(err));
@@ -73,6 +75,7 @@ export default function Card() {
       setRemoveBasket({ ...removeBasket });
       const basketService = new BasketService();
       const result = await basketService.updateBasket(removeBasket);
+      setOrderBuilder(new Date());
       await sweetTopSmallSuccessAlert("Subtract successfully!", 700);
     } catch (err) {
       console.log(err);

@@ -7,6 +7,8 @@ interface GlobalInterface {
   setAuthMember: (member: Member | null) => void;
   addBasket: BasketInput;
   setAddBasket: (card: BasketInput) => void;
+  orderBuilder: Date;
+  setOrderBuilder: (input: Date) => void;
 }
 
 export const GlobalContext = createContext<GlobalInterface | undefined>(

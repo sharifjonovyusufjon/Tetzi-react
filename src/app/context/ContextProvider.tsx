@@ -19,11 +19,20 @@ const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     basketQuantity: 0,
   });
 
+  const [orderBuilder, setOrderBuilder] = useState<Date>(new Date());
+
   console.log("=== verify ===");
 
   return (
     <GlobalContext.Provider
-      value={{ authMember, setAuthMember, addBasket, setAddBasket }}
+      value={{
+        authMember,
+        setAuthMember,
+        addBasket,
+        setAddBasket,
+        orderBuilder,
+        setOrderBuilder,
+      }}
     >
       {children}
     </GlobalContext.Provider>
