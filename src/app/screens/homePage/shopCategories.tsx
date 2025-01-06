@@ -6,19 +6,19 @@ export default function ShopCategories() {
   const shopCategories = [
     {
       productCategory: "CAR SEAT",
-      productImage: "/img/baby.jpg",
+      productImage: "/img/car-seat.jpg",
     },
     {
       productCategory: "STROLLER",
-      productImage: "/img/baby.jpg",
+      productImage: "/img/stroller.jpg",
     },
     {
       productCategory: "CLOTHES",
-      productImage: "/img/baby.jpg",
+      productImage: "/img/clothes.jpg",
     },
     {
       productCategory: "SHOES",
-      productImage: "/img/baby.jpg",
+      productImage: "/img/shoes.jpg",
     },
   ];
 
