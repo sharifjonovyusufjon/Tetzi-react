@@ -115,6 +115,17 @@ export default function OrdersPage() {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    const orderService = new OrderService();
+    orderService
+      .updateOrder(updateOrder)
+      .then((data) => {
+        setOrderUp((prevOrderUp) => !prevOrderUp);
+        sweetTopSmallSuccessAlert("Successfully!", 700);
+      })
+      .catch((err) => console.log(err));
+  }, [updateOrder]);
+
   const handlePagePause = (input: number) => {
     pausedInput.page = input;
     setPausedInput({ ...pausedInput });
@@ -143,10 +154,6 @@ export default function OrdersPage() {
     setOrderUp(!orderUp);
   };
 
-  const getOrders = [
-    [1, 2, 3, 4, 5],
-    [1, 2],
-  ];
   return (
     <div className="orders-page">
       <OtherOrders />
