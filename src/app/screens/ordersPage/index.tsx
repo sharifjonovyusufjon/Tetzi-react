@@ -81,6 +81,8 @@ export default function OrdersPage() {
     orderStatus: OrderStatus.PAUSE,
   });
 
+  const [orderUp, setOrderUp] = useState<boolean>(true);
+
   useEffect(() => {
     setPage(1);
   }, [value]);
@@ -89,24 +91,25 @@ export default function OrdersPage() {
     const orderService = new OrderService();
     orderService
       .getAllOrders(pausedInput)
-      .then((data) => setPausedOrders(data))
+      .then((data) => {
+        setPausedOrders(data);
+      })
       .catch((err) => console.log(err));
 
     orderService
       .getAllOrders(processInput)
-      .then((data) => setProcessOrders(data))
+      .then((data) => {
+        setProcessOrders(data);
+      })
       .catch((err) => console.log(err));
 
     orderService
       .getAllOrders(finishInput)
-      .then((data) => setFinishOrders(data))
+      .then((data) => {
+        setFinishOrders(data);
+      })
       .catch((err) => console.log(err));
-
-    orderService
-      .updateOrder(updateOrder)
-      .then((data) => sweetTopSmallSuccessAlert("Successfully!", 700))
-      .catch((err) => console.log(err));
-  }, [updateOrder, pausedInput, processInput, finishInput]);
+  }, [pausedInput, processInput, finishInput, orderUp]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -127,16 +130,17 @@ export default function OrdersPage() {
     setPausedInput({ ...finishInput });
   };
 
-  const handleFinish = (id: string) => {
+  const handleFinish = async (id: string) => {
     updateOrder.orderId = id;
     updateOrder.orderStatus = OrderStatus.FINISH;
-    setUpdateOrder({ ...updateOrder });
+    await setUpdateOrder({ ...updateOrder });
   };
 
   const handleProcess = (id: string) => {
     updateOrder.orderId = id;
     updateOrder.orderStatus = OrderStatus.PROCESS;
     setUpdateOrder({ ...updateOrder });
+    setOrderUp(!orderUp);
   };
 
   const getOrders = [

@@ -80,9 +80,13 @@ export default function Account() {
     setMemberUpdateInput({ ...memberUpdateInput });
   };
 
-  const handleAddress = (e: T) => {
-    memberUpdateInput.memberAddress = e.target.value;
-    setMemberUpdateInput({ ...memberUpdateInput });
+  const handleAddress = (e: T, index: number) => {
+    const updatedAddress = [...(memberUpdateInput.memberAddress || [])];
+    updatedAddress[index] = e.target.value;
+    setMemberUpdateInput({
+      ...memberUpdateInput,
+      memberAddress: updatedAddress,
+    });
   };
 
   const handleCity = (e: T) => {
@@ -239,18 +243,18 @@ export default function Account() {
                     <span className="text">Address 1</span>
                     <input
                       type="text"
-                      value={memberUpdateInput.memberAddress}
+                      value={memberUpdateInput.memberAddress?.[0] ?? ""}
                       placeholder={authMember?.memberAddress[0]}
-                      onChange={handleAddress}
+                      onChange={(e) => handleAddress(e, 0)}
                     />
                   </Stack>
                   <Stack className="input">
                     <span className="text">Address 2</span>
                     <input
                       type="text"
-                      value={memberUpdateInput.memberAddress}
+                      value={memberUpdateInput.memberAddress?.[1] ?? ""}
                       placeholder={authMember?.memberAddress[1]}
-                      onChange={handleAddress}
+                      onChange={(e) => handleAddress(e, 1)}
                     />
                   </Stack>
                 </Stack>
